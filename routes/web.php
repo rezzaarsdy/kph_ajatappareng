@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     DashboardController,
-    Admin\DashboardAdmin
+    Admin\DashboardAdmin,
+    Admin\AdminController
 };
 
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -25,3 +26,11 @@ Route::get('/', function () {
 
 Route::get('dashboard', [DashboardController::class, 'index']);
 Route::get('dashboard', [DashboardAdmin::class, 'index'])->name('dashboard');
+Route::get('admin', [AdminController::class, 'index'])->name('admin.index');
+Route::get('admin/create', [AdminController::class, 'create'])->name('admin.create');
+Route::post('admin/store', [AdminController::class, 'store'])->name('admin.store');
+Route::get('/admin/edit/{uuid}', [AdminController::class, 'edit'])->name('admin.edit');
+Route::get('/admin/delete/{uuid}', [AdminController::class, 'destroy'])->name('admin.destroy');
+Route::resource('admin', AdminController::class)->only(
+    'update'
+);

@@ -35,7 +35,7 @@
     
             $(document).Toasts('create', {
                 class: 'bg-danger',
-                title: 'Oops, There is something wrong!',
+                title: 'Oops, Ada beberapa yang error',
                 body: msg
             })
         });

@@ -48,31 +48,10 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{route('dashboard')}}" class="nav-link`">
-              <i class="nav-icon fas fa-car"></i>
-              <p>
-                Admin 
-                {{-- <span class="right badge badge-danger">New</span> --}}
-              </p>
-            </a>
-          </li>
-
-          <li class="nav-header">BACK OFFICE</li>
-          {{-- <li class="nav-item">
-            <a href="{{url('admin/dashboard')}}" class="nav-link {{ (request()->is('admin/dashboard')) ? 'active' : '' }}">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Dashboard 
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </a>
-          </li> --}}
-
-          <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-database"></i>
               <p>
-                Master Database
+                Informasi
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -80,7 +59,7 @@
               <li class="nav-item">
                 <a href="" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Series</p>
+                  <p>HKM</p>
                 </a>
               </li>
               {{-- <li class="nav-item">
@@ -92,19 +71,25 @@
               <li class="nav-item">
                 <a href="" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Products</p>
+                  <p>HPHD</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Product Varieties</p>
+                  <p>HTR</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Goods Images</p>
+                  <p>Perlindungan dan Pengamangan Hutan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Lainnya</p>
                 </a>
               </li>
               {{-- <li class="nav-item">
@@ -115,6 +100,58 @@
               </li> --}}
             </ul>
           </li>
+
+          <li class="nav-item">
+            <a href="{{route('dashboard')}}" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Anggota 
+                {{-- <span class="right badge badge-danger">New</span> --}}
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{route('dashboard')}}" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Informasi 
+                {{-- <span class="right badge badge-danger">New</span> --}}
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{route('dashboard')}}" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Berita 
+                {{-- <span class="right badge badge-danger">New</span> --}}
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{route('admin.index')}}" class="nav-link {{ (request()->routeIs('admin.index', 'admin.create')) ? 'active' : '' }}">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Admin 
+                {{-- <span class="right badge badge-danger">New</span> --}}
+              </p>
+            </a>
+          </li>
+
+          {{-- <li class="nav-item">
+            <a href="{{url('admin/dashboard')}}" class="nav-link {{ (request()->is('admin/dashboard')) ? 'active' : '' }}">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Dashboard 
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li> --}}
+
+          
         
         </ul>
       </nav>
