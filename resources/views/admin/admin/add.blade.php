@@ -1,5 +1,9 @@
 @extends('admin.layout')
 
+@push('css')
+  <link rel="stylesheet" href="{{URL::asset('assets/dist/css/upload-data.css')}}">
+@endpush
+
 @section('content')
 
 <!-- mulai disini content nya -->
@@ -82,12 +86,20 @@
                 </button>
               </div>
             </div>
-            <div class="card-body">
-              <div class="form-group">
-                <label for="inputEstimatedBudget">Upload Foto</label>
-                <input type="number" id="inputEstimatedBudget" class="form-control">
+            <div class="file-upload">
+              <div class="image-upload-wrap">
+                  <input class="file-upload-input" type='file' name="file" onchange="readURL(this);" accept="application/jpg"/>
+                  <div class="drag-text">
+                  <h3>Drag and drop a file or select add Image</h3>
+                  </div>
               </div>
-            </div>
+              <div class="file-upload-content">
+                  <img class="file-upload-image" src="#" alt="your image" />
+                  <div class="image-title-wrap">
+                  <button type="button" onclick="removeUpload()" class="remove-image">Hapus <span class="image-title">Data</span></button>
+                  </div>
+              </div>
+          </div>
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
@@ -107,4 +119,8 @@
 
 <!-- batas nya content -->
 
-@stop
+@endsection
+
+@push('javascript')
+    <script src="{{ URL::asset('assets/dist/js/upload.js') }}"></script>
+@endpush 

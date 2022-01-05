@@ -8,8 +8,9 @@ use App\Models\{
     User,
     Role
 };
+use File;
+use DB;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Error;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Str;
@@ -52,6 +53,7 @@ class AdminController extends Controller
             'username' => 'unique:users|required|min:5',
             'password' => 'required|min:4',
             'role_id' => 'required',
+            'img' => 'file|image|mimes:jpeg,png,jpg|max:2048'
         ], [
             'name.required' => 'Nama lengkap harus diisi',
             'username.required' => 'Username harus diisi',
@@ -60,6 +62,7 @@ class AdminController extends Controller
             'password.required' => 'Password harus diisi',
             'password.min' => 'Password minimal 4 karakter',
             'role_id.required' => 'Pilih role anda',
+            'img.mimes' => 'File Harus Bertipe JPG/JPEG/PNG'
         ]);
 
         DB::beginTransaction();
@@ -71,6 +74,12 @@ class AdminController extends Controller
             $dataAdmin->username = $request->username;
             $dataAdmin->password = bcrypt($request->password);
             $dataAdmin->role_id = $request->role_id;
+            if ($request->file) {
+                $namaFile = 'Foto Profil__' . $dataAdmin->name . '__' . time() . '__' . $request->file->getClientOriginalName();
+                $path = 'public/Profile';
+                $request->file->storeAs($path, $namaFile);
+                $dataAdmin->img = $namaFile;
+            }
             $dataAdmin->save();
 
             DB::commit();
@@ -128,6 +137,7 @@ class AdminController extends Controller
             'username' => '|required|min:5|unique:users,username,' . $dataAdmin->id,
             'password' => 'required|min:4',
             'role_id' => 'required',
+            'img' => 'file|image|mimes:jpeg,png,jpg|max:2048'
         ], [
             'name.required' => 'Nama lengkap harus diisi',
             'username.required' => 'Username harus diisi',
@@ -136,9 +146,9 @@ class AdminController extends Controller
             'password.required' => 'Password harus diisi',
             'password.min' => 'Password minimal 4 karakter',
             'role_id.required' => 'Pilih role anda',
+            'img.mimes' => 'File Harus Bertipe JPG/JPEG/PNG'
         ]);
         // dd($request->all());
-
 
         DB::beginTransaction();
         try {
@@ -146,6 +156,18 @@ class AdminController extends Controller
             $dataAdmin->username = $request->username;
             $dataAdmin->password = bcrypt($request->password);
             $dataAdmin->role_id = $request->role_id;
+
+            if ($request->img != '') {
+                if ($dataAdmin->img != '' && $dataAdmin->img != null) {
+                    $path = 'Public/profile';
+                    $file_lama = $path . $dataAdmin->img;
+                    \File::delete($file_lama);
+                }
+                $namaFile = 'Foto Profil__' . $dataAdmin->name . '__' . time() . '__' . $request->img->getClientOriginalName();
+                $path = 'public/profile';
+                $request->img->storeAs($path, $namaFile);
+                $dataAdmin->img = $namaFile;
+            }
 
             $dataAdmin->save();
 

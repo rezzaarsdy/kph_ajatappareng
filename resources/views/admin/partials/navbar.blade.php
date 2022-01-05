@@ -21,7 +21,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-slide="true" href="" role="button">
+        <a class="nav-link" data-slide="true" href="{{route('logout')}}" role="button">
           <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
         </a>
       </li>

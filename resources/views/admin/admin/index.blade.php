@@ -40,7 +40,7 @@
                 <!-- /.card-header -->
                 <div class="card-body">
                     @if (session()->has('message'))
-                        <div class="alert alert-custom alert-light-success fade show mb-9" role="alert">
+                        <div class="alert alert-success alert-dismissible fade show mb-9" role="alert">
                             <div class="alert-icon">
                                 <i class="flaticon-success"></i>
                             </div>
@@ -48,7 +48,7 @@
                             <div class="alert-close">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">
-                                        <i class="ki ki-close"></i>
+                                      &times;
                                     </span>
                                 </button>
                             </div>
