@@ -198,6 +198,9 @@ class AdminController extends Controller
         DB::beginTransaction();
         try {
             $user = User::findOrFail($uuid);
+            if($user->img){
+                File::delete('storage/Profile/'.$user->img);
+            }
             $user->delete();
             DB::commit();
             return redirect()->route('admin.index')->with([

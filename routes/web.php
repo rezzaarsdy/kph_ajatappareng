@@ -7,6 +7,8 @@ use App\Http\Controllers\{
     Admin\AdminController,
     Admin\LoginController
 };
+use App\Http\Controllers\admin\MemberController;
+use App\Models\Member;
 use Illuminate\Auth\Events\Login;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -31,8 +33,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::group(['middleware' => ['auth', 'checklevel:1']], function () {
-    Route::get('/dashboard', [DashboardController::class, 'index']);
-    Route::get('/dashboard', [DashboardAdmin::class, 'index'])->name('dashboard');
+    //routing Superadmin Admin
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/admin/create', [AdminController::class, 'create'])->name('admin.create');
     Route::post('/admin/store', [AdminController::class, 'store'])->name('admin.store');
@@ -41,4 +42,20 @@ Route::group(['middleware' => ['auth', 'checklevel:1']], function () {
     Route::resource('admin', AdminController::class)->only(
         'update'
     );
+});
+
+Route::group(['middleware' => ['auth', 'checklevel:1,2']], function () {
+    Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/dashboard', [DashboardAdmin::class, 'index'])->name('dashboard');
+
+    //routing Member
+    Route::get('anggota', [MemberController::class, 'index'])->name('member.index');
+    Route::get('anggota/create', [MemberController::class, 'create'])->name('member.create');
+    Route::post('anggota/create', [MemberController::class, 'store'])->name('member.store');
+    Route::get('anggota/edit/{uuid}', [MemberController::class, 'edit'])->name('member.edit');
+    Route::resource('anggota', MemberController::class)->only(
+        'update'
+    );
+    Route::get('member/delete/{uuid}', [MemberController::class, 'destroy'])->name('member.destroy');
+    
 });

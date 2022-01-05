@@ -39,21 +39,6 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    @if (session()->has('message'))
-                        <div class="alert alert-success alert-dismissible fade show mb-9" role="alert">
-                            <div class="alert-icon">
-                                <i class="flaticon-success"></i>
-                            </div>
-                            <div class="alert-text">{{ session('message') }}</div>
-                            <div class="alert-close">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">
-                                      &times;
-                                    </span>
-                                </button>
-                            </div>
-                        </div>
-                    @endif
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>

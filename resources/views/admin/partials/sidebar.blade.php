@@ -94,7 +94,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{route('dashboard')}}" class="nav-link">
+            <a href="{{route('member.index')}}" class="nav-link {{ (request()->routeIs('member.index', 'member.create', 'member.edit')) ? 'active' : '' }}">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Anggota 
