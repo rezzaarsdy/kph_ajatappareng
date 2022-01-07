@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
+    public function berita()
+    {
+        return $this->hasMany(Berita::class);
+    }
 }

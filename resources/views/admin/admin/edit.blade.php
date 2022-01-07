@@ -88,7 +88,12 @@
                 </button>
               </div>
             </div>
+            <br>
+            <div class="form-group">
+                <img width="100px" height="100px" class="rounded mx-auto d-block" src="{{asset('storage/Profile/'. $dataAdmin->img)}}" alt="">
+            </div>
             <div class="file-upload">
+              <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Ganti Foto</button>
               <div class="image-upload-wrap">
                   <input class="file-upload-input" type='file' name="img" onchange="readURL(this);" accept="application/jpg"/>
                   <div class="drag-text">

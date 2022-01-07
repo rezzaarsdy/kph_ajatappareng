@@ -114,7 +114,7 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{route('dashboard')}}" class="nav-link">
+            <a href="{{route('berita.index')}}" class="nav-link {{ (request()->routeIs('berita.index', 'berita.create', 'berita.edit')) ? 'active' : '' }}">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Berita 

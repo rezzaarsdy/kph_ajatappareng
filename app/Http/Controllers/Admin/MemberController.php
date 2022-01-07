@@ -134,9 +134,68 @@ class MemberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $uuid)
     {
-        //
+        $member = Member::findOrFail($uuid);
+        $this->validate($request, [
+            'fullname' => 'required',
+            'address' => 'required',
+            'place_of_birth' => 'required',
+            'date_of_birth' => 'required',
+            'religion' => 'required',
+            'email' => 'required|email',
+            'education' => 'required',
+            'golongan' => 'required',
+            'img' => 'file|image|mimes:jpeg,png,jpg|max:2048'
+        ], [
+            'fullname.required' => 'Nama lengkap harus diisi',
+            'address.required' => 'Alamat harus diisi',
+            'place_of_birth.required' => 'Tempat Lahir harus diisi',
+            'date_of_birth.required' => 'Tanggal Lahir harus diisi',
+            'religion.required' => 'Agama harus diisi',
+            'email.required' => 'E-mail harus diisi',
+            'education.required' => 'Pendidikan Terakhir harus diisi',
+            'golongan.required' => 'Status harus diisi',
+            'img.mimes' => 'File Harus Bertipe JPG/JPEG/PNG'
+        ]);
+
+        DB::beginTransaction();
+        try{
+            $member->fullname = $request->fullname;
+            $member->address = $request->address;
+            $member->place_of_birth = $request->place_of_birth;
+            $member->date_of_birth = $request->date_of_birth;
+            $member->religion = $request->religion;
+            $member->email = $request->email;
+            $member->education = $request->education;
+            $member->golongan = $request->golongan;
+            $member->level_id = 1; //blm terkoneksi dengan database level
+            if ($request->file) {
+                if (\File::exists('storage/Member/' . $member->img)) {
+                    \File::delete('storage/Member/' . $member->img);
+                }
+                $fileName = 'Foto Member__' . $request->fullname . '__' . time() . '__' . $request->file->getClientOriginalName();
+                $path = 'public/Member';
+                $request->file->storeAs($path, $fileName);
+                $member->img = $fileName;
+            }
+            $member->save();
+
+            DB::commit();
+
+            return redirect()->route('member.index')->with([
+                'f_bg' => 'bg-success',
+                'f_title' => 'Berhasil.',
+                'f_msg' => 'Data Berhasil Diperbarui.',
+            ]);
+        } catch(Error $e){
+            DB::rollBack();
+            return redirect()->route('member.index')->with([
+                'f_bg' => 'bg-danger',
+                'f_title' => 'Tidak berhasil',
+                'f_msg' => 'Data Tidak Berhasil Diperbarui.',
+            ]);
+        }
     }
 
     /**

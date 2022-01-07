@@ -123,7 +123,14 @@
                         </button>
                     </div>
                 </div>
+                <br>
+                <div class="form-group">
+                    <img width="100px" height="100px" class="rounded mx-auto d-block" src="{{asset('storage/Member/'. $member->img)}}" alt="">
+                </div>
+
+
                 <div class="file-upload">
+                    <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Ganti Foto</button>
                     <div class="image-upload-wrap">
                         <input class="file-upload-input" type='file' name="file" value="{{old('file')}}" onchange="readURL(this);" accept="application/jpg"/>
                         <div class="drag-text">
@@ -131,7 +138,7 @@
                         </div>
                     </div>
                     <div class="file-upload-content">
-                        <img class="file-upload-image" value="{{old('file')}}" src="{{old('file')}}" alt="your image" />
+                        <img class="file-upload-image" alt="your image" />
                         <div class="image-title-wrap">
                             <button type="button" onclick="removeUpload()" class="remove-image">Hapus <span class="image-title">Data</span></button>
                         </div>

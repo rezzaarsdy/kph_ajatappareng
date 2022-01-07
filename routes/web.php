@@ -7,7 +7,9 @@ use App\Http\Controllers\{
     Admin\AdminController,
     Admin\LoginController
 };
+use App\Http\Controllers\admin\BeritaController;
 use App\Http\Controllers\admin\MemberController;
+use App\Models\Berita;
 use App\Models\Member;
 use Illuminate\Auth\Events\Login;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -57,5 +59,11 @@ Route::group(['middleware' => ['auth', 'checklevel:1,2']], function () {
         'update'
     );
     Route::get('member/delete/{uuid}', [MemberController::class, 'destroy'])->name('member.destroy');
-    
+
+
+    //routing berita
+    Route::get('berita', [BeritaController::class, 'index'])->name('berita.index');
+    Route::get('berita/create', [BeritaController::class, 'create'])->name('berita.create');
+    Route::post('berita/create', [BeritaController::class, 'store'])->name('berita.store');
+    Route::get('berita/edit/{uuid}', [BeritaController::class, 'edit'])->name('edit');
 });

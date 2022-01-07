@@ -70,17 +70,7 @@
                             </tr>
                         @endforeach
                     </tbody>
-                    <tfoot>
-                    <tr>
-                        <th>No.</th>
-                        <th>Nama</th>
-                        <th>Alamat</th>
-                        <th>Pendidikan Terakhir</th>
-                        <th>Status</th>
-                        <th>E-mail</th>
-                        <th>Action</th>
-                    </tr>
-                    </tfoot>
+                    
                 </table>
                 </div>
                 <!-- /.card-body -->

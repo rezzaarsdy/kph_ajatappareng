@@ -157,11 +157,9 @@ class AdminController extends Controller
             $dataAdmin->password = bcrypt($request->password);
             $dataAdmin->role_id = $request->role_id;
 
-            if ($request->img != '') {
-                if ($dataAdmin->img != '' && $dataAdmin->img != null) {
-                    $path = 'Public/profile';
-                    $file_lama = $path . $dataAdmin->img;
-                    \File::delete($file_lama);
+            if($request->img){
+                if (\File::exists('storage/Profile/' . $dataAdmin->img )){
+                    \File::delete('storage/Profile/' . $dataAdmin->img);
                 }
                 $namaFile = 'Foto Profil__' . $dataAdmin->name . '__' . time() . '__' . $request->img->getClientOriginalName();
                 $path = 'public/profile';
