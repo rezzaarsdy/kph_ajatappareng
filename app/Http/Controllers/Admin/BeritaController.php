@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Berita;
 use App\Models\Berita_category;
 use File;
 use DB;
@@ -21,7 +22,9 @@ class BeritaController extends Controller
      */
     public function index()
     {
-        return view('admin.berita.index');
+        $berita = Berita::select('beritas.*', 'users.id', 'users.name')
+            ->leftJoin('users', 'beritas.user_id', '=', 'users.id')->get();
+        return view('admin.berita.index', compact('berita'));
     }
 
     /**
@@ -43,7 +46,49 @@ class BeritaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'berita_category_id' => 'required',
+            'file' => 'file|image|mimes:jpeg,png,jpg|max:2048',
+            'content' => 'required'
+        ], [
+            'title.required' => 'Judul harus diisi',
+            'berita_category_id.required' => 'Kategori berita harus diisi',
+            'file.mimes' => 'File Harus Bertipe JPG/JPEG/PNG',
+            'content.required' => 'Isi Berita harus diisi'
+        ]);
+
+        DB::beginTransaction();
+        try{
+            $uuid = Uuid::uuid4()->getHex();
+            $berita = new Berita;
+            $berita->uuid = $uuid;
+            $berita->title = $request->title;
+            $berita->berita_category_id = $request->berita_category_id;
+            $berita->user_id = Auth()->user()->id;
+            $berita->content = $request->content;
+            if($request->file){
+                $nameFile = 'Foto Berita__' . $berita->title .  '__' . time() . '__' . $request->file->getClientOriginalName();
+                $path = 'public/Berita';
+                $request->file->storeAs($path, $nameFile);
+                $berita->img = $nameFile;
+            }
+            $berita->save();
+            
+            DB::commit();
+            return redirect()->route('berita.index')->with([
+                'f_bg' => 'bg-success',
+                'f_title' => 'Berhasil',
+                'f_msg' => 'Data Berhasil Ditambah',
+            ]);
+        } catch (Error $e){
+            DB::rollBack();
+            return redirect()->route('berita.index')->with([
+                'f_bg' => 'bg-danger',
+                'f_title' => 'Tidak Berhasil.',
+                'f_msg' => 'Data Tidak Berhasil Ditambah.',
+            ]);
+        }
     }
 
     /**
@@ -63,9 +108,11 @@ class BeritaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($uuid)
     {
-        //
+        $category = Berita_category::all();
+        $berita = Berita::findOrFail($uuid);
+        return view('admin.berita.edit', compact('berita', 'category'));
     }
 
     /**
@@ -75,9 +122,51 @@ class BeritaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $uuid)
     {
-        //
+        $berita = Berita::findOrFail($uuid);
+        $this->validate($request, [
+            'title' => 'required',
+            'berita_category_id' => 'required',
+            'file' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
+            'content' => 'required'
+        ], [
+            'title.required' => 'Judul harus diisi',
+            'berita_category_id.required' => 'Kategori berita harus diisi',
+            'file.mimes' => 'File Harus Bertipe JPG/JPEG/PNG',
+            'content.required' => 'Isi Berita harus diisi'
+        ]);
+
+        DB::beginTransaction();
+        try{
+            $berita->title = $request->title;
+            $berita->berita_category_id = $request->berita_category_id;
+            $berita->content = $request->content;
+
+            if ($request->file) {
+                if (\File::exists('storage/Berita/' . $berita->img)) {
+                    \File::delete('storage/Berita/' . $berita->img);
+                }
+                $fileName = 'Foto Berita__' . $berita->title . '__' . time() . '__' . $request->file->getClientOriginalName();
+                $path = 'public/Member';
+                $request->file->storeAs($path, $fileName);
+                $berita->img = $fileName;
+            }
+            $berita->save();
+            DB::commit();
+            return redirect()->route('berita.index')->with([
+                'f_bg' => 'bg-success',
+                'f_title' => 'Berhasil.',
+                'f_msg' => 'Data Berhasil Diperbarui.',
+            ]);
+        } catch(Error $e){
+            DB::rollBack();
+            return redirect()->route('berita.index')->with([
+                'f_bg' => 'bg-danger',
+                'f_title' => 'Tidak berhasil',
+                'f_msg' => 'Data Tidak Berhasil Diperbarui.',
+            ]);
+        }
     }
 
     /**
@@ -86,8 +175,28 @@ class BeritaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($uuid)
     {
-        //
+        DB::beginTransaction();
+        try{
+            $berita = Berita::findOrFail($uuid);
+            if($berita->img){
+                \File::delete('storage/Berita/'.$berita->img);
+            }
+            $berita->delete();
+            DB::commit();
+            return redirect()->route('berita.index')->with([
+                'f_bg' => 'bg-success',
+                'f_title' => 'Berhasil.',
+                'f_msg' => 'Data Berhasil Dihapus.',
+            ]);
+        } catch (Error $e) {
+            DB::rollback();
+            return redirect()->route('berita.index')->with([
+                'f_bg' => 'bg-danger',
+                'f_title' => 'Tidak Berhasil',
+                'f_msg' => 'Data Tidak Berhasil Dihapus',
+            ]);
+        }
     }
 }

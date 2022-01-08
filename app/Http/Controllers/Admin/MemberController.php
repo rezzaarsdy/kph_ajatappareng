@@ -227,6 +227,5 @@ class MemberController extends Controller
                 'f_msg' => 'Data Tidak Berhasil Dihapus',
             ]);
         }
-
     }
 }

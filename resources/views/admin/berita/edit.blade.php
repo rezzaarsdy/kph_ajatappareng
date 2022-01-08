@@ -41,12 +41,13 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('berita.store') }}" method="POST" id="quickForm" enctype="multipart/form-data">
-                            @csrf    
+                        <form action="{{ route('berita.upload', $berita->uuid) }}" method="POST" id="quickForm" enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT') 
                             <div class="form-group" id="form1">
                                 <label>Judul Berita</label>
                                 @error('title') <span style="font-size: 12px; color:red; display: block;">{{ $message }}</span> @enderror
-                                <input type="name" min="0" id="title" name="title" value="{{ old ('title') }}" class="form-control" placeholder="Masukkan Judul Berita" >
+                                <input type="name" min="0" id="title" name="title" value="{{ $berita->title }}" class="form-control" placeholder="Masukkan Judul Berita" >
                             </div>
 
                             <div class="form-group">
@@ -55,7 +56,7 @@
                                 <select id="berita_category_id" name="berita_category_id" class="form-control select_role">
                                     <option value="" selected disabled hidden>Silakan Pilih</option>
                                     @foreach ($category as $item)
-                                        <option value="{{ $item->id }}" @if (old('berita_category_id') == $item->id ) selected @endif>{{$item->name}}</option>
+                                        <option value="{{ $item->id }}" @if ($berita->berita_category_id == $item->id ) selected @endif>{{$item->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -75,7 +76,12 @@
                             </button>
                         </div>
                     </div>
+                    <br>
+                    <div class="form-group">
+                        <img width="100px" height="100px" class="rounded mx-auto d-block" src="{{asset('storage/Berita/'. $berita->img)}}" alt="">
+                    </div>
                     <div class="file-upload">
+                        <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Ganti Foto</button>
                         <div class="image-upload-wrap">
                             <input class="file-upload-input" type='file' name="file" onchange="readURL(this);" accept="application/jpg"/>
                             <div class="drag-text">
@@ -108,7 +114,7 @@
                         <div class="form-group">
                             <label>Content:</label>
                             @error('content') <span style="font-size: 12px; color:red; display: block;">{{ $message }}</span> @enderror
-                            <textarea class="form-control" style="height:50px" value="{{ old('content') }}" name="content"></textarea>
+                            <textarea class="form-control" style="height:50px" value="{{$berita->content}}" name="content"></textarea>
                         </div>
                     </div>
                     <!-- /.card-body -->

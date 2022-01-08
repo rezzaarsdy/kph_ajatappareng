@@ -151,7 +151,7 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <a href="{{ route('admin.index') }}" class="btn btn-secondary">Cancel</a>
+            <a href="{{ route('member.index') }}" class="btn btn-secondary">Cancel</a>
             <input type="submit" value="Submit" class="btn btn-success float-right">
         </div>
     </div>

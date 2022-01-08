@@ -32,7 +32,7 @@
             <div class="card">
             <div class="card-header">
                 <div class="bs-example">
-                <h3 class="card-title">Admin</h3>
+                <h3 class="card-title">Berita</h3>
                 <a href="{{route('berita.create')}}" class="btn btn-primary font-weight-bolder float-right">
                     <i class="la la-plus"></i>Tambah Data</a>
                 </div>
@@ -51,7 +51,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    @foreach ($berita as $data)
+                        <tr>
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$data->title}}</td>
+                            <td>{{$data->name}}</td>
+                            <td><img width="100px" height="100px" src="{{asset('storage/Berita/'.$data->img)}}" alt=""></td>
+                            <td> 0 </td>
+                            <td>
+                                <a class="badge badge-info m-1" href="{{route('berita.edit', $data->uuid)}}">
+                                    <span class="fa fa-edit"></span> Edit
+                                </a>
+                                <a class="badge badge-danger m-1" href="{{route('berita.destroy', $data->uuid)}}" onclick=" return confirm('Apakah anda ingin menghapus data ini?')">
+                                    <span class="fa fa-trash"></span> Hapus
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
                 
                 </table>
