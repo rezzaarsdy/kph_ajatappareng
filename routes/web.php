@@ -8,9 +8,13 @@ use App\Http\Controllers\{
     Admin\LoginController
 };
 use App\Http\Controllers\admin\BeritaController;
+use App\Http\Controllers\admin\GaleriController;
+use App\Http\Controllers\admin\InboxController;
 use App\Http\Controllers\admin\MemberController;
+use App\Http\Controllers\admin\ProfileController;
 use App\Models\Berita;
 use App\Models\Member;
+use App\Models\Profile;
 use Illuminate\Auth\Events\Login;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -69,5 +73,29 @@ Route::group(['middleware' => ['auth', 'checklevel:1,2']], function () {
     Route::resource('berita', BeritaController::class)->only(
         'update',
     );
-    Route::get('member/delete/{uuid}', [BeritaController::class, 'destroy'])->name('berita.destroy');
+    Route::get('berita/delete/{uuid}', [BeritaController::class, 'destroy'])->name('berita.destroy');
+
+    //Routing Galeri
+    Route::get('galeri', [GaleriController::class, 'index'])->name('galeri.index');
+    Route::get('galeri/create', [GaleriController::class, 'create'])->name('galeri.create');
+    Route::post('galeri/create', [GaleriController::class, 'store'])->name('galeri.store');
+    Route::get('galeri/edit/{uuid}', [GaleriController::class, 'edit'])->name('galeri.edit');
+    Route::resource('galeri', GaleriController::class)->only(
+        'update'
+    );
+    Route::get('galeri/delete/{uuid}', [GaleriController::class, 'destroy'])->name('galeri.destroy');
+
+    //routing Index
+    Route::get('inbox', [InboxController::class, 'index'])->name('inbox.index');
+
+    //Routing Profile
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('profile/create', [ProfileController::class, 'create'])->name('profile.create');
+    Route::post('profile/create', [ProfileController::class, 'store'])->name('profile.store');
+    Route::get('profile/edit/{uuid}', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::resource('profile', ProfileController::class)->only(
+        'update'
+    );
+    Route::get('profile/delete/{uuid}', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
 });

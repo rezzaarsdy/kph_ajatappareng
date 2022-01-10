@@ -88,4 +88,4 @@
 
 <!-- batas nya content -->
 
-@stop
+@endsection

@@ -40,6 +40,16 @@
           </li>
 
           <li class="nav-item">
+            <a href="{{route('profile.index')}}" class="nav-link {{ (request()->routeIs('profile.index', 'profile.create', 'profile.edit')) ? 'active' : '' }}">
+              <i class="nav-icon fas fa-building"></i>
+              <p>
+                Profil 
+                {{-- <span class="right badge badge-danger">New</span> --}}
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-database"></i>
               <p>
@@ -104,20 +114,30 @@
           </li>
 
           <li class="nav-item">
-            <a href="{{route('dashboard')}}" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
+            <a href="{{route('berita.index')}}" class="nav-link {{ (request()->routeIs('berita.index', 'berita.create', 'berita.edit')) ? 'active' : '' }}">
+              <i class="nav-icon fas fa-newspaper"></i>
               <p>
-                Response 
+                Berita 
                 {{-- <span class="right badge badge-danger">New</span> --}}
               </p>
             </a>
           </li>
 
           <li class="nav-item">
-            <a href="{{route('berita.index')}}" class="nav-link {{ (request()->routeIs('berita.index', 'berita.create', 'berita.edit')) ? 'active' : '' }}">
-              <i class="nav-icon fas fa-users"></i>
+            <a href="{{route('galeri.index')}}" class="nav-link {{ (request()->routeIs('galeri.index', 'galeri.create', 'galeri.edit')) ? 'active' : '' }}">
+              <i class="nav-icon fas fa-images"></i>
               <p>
-                Berita 
+                Galeri 
+                {{-- <span class="right badge badge-danger">New</span> --}}
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{route('inbox.index')}}" class="nav-link {{ (request()->routeIs('inbox.index')) ? 'active' : '' }}">
+              <i class="nav-icon fas fa-inbox"></i>
+              <p>
+                Inbox 
                 {{-- <span class="right badge badge-danger">New</span> --}}
               </p>
             </a>
