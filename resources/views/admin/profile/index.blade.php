@@ -51,7 +51,7 @@
                             @foreach ($profile as $data)
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$data->profile_category_id}}</td>
+                                    <td>{{$data->name}}</td>
                                     <td>{{$data->content}}</td>
                                     <td>
                                         <a class="badge badge-info m-1" href="{{route('profile.edit', $data->uuid)}}">

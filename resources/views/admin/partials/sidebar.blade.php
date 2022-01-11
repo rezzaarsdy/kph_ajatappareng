@@ -2,8 +2,8 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{ url('/') }}" class="brand-link">
-      <img src="{{ URL::asset('assets/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: 1.">
+    <a href="{{ route('dashboard') }}" class="brand-link">
+      <img src="{{ URL::asset('assets/dist/img/1540276247.jpg')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: 1.">
       <span class="brand-text font-weight-light">Ajatappareng</span>
     </a>
 
@@ -142,16 +142,17 @@
               </p>
             </a>
           </li>
-
-          <li class="nav-item">
-            <a href="{{route('admin.index')}}" class="nav-link {{ (request()->routeIs('admin.index', 'admin.create', 'admin.edit')) ? 'active' : '' }}">
-              <i class="nav-icon fas fa-user"></i>
-              <p>
-                Admin 
-                {{-- <span class="right badge badge-danger">New</span> --}}
-              </p>
-            </a>
-          </li>
+          @if(Auth::user()->role_id == 1)
+            <li class="nav-item">
+              <a href="{{route('admin.index')}}" class="nav-link {{ (request()->routeIs('admin.index', 'admin.create', 'admin.edit')) ? 'active' : '' }}">
+                <i class="nav-icon fas fa-user"></i>
+                <p>
+                  Admin 
+                  {{-- <span class="right badge badge-danger">New</span> --}}
+                </p>
+              </a>
+            </li>
+          @endif
 
           {{-- <li class="nav-item">
             <a href="{{url('admin/dashboard')}}" class="nav-link {{ (request()->is('admin/dashboard')) ? 'active' : '' }}">

@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Inbox extends Model
 {
+    protected $primaryKey = 'uuid';
+    public $incrementing = false;
     use HasFactory;
 }

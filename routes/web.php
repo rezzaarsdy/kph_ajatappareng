@@ -69,7 +69,7 @@ Route::group(['middleware' => ['auth', 'checklevel:1,2']], function () {
     Route::get('berita', [BeritaController::class, 'index'])->name('berita.index');
     Route::get('berita/create', [BeritaController::class, 'create'])->name('berita.create');
     Route::post('berita/create', [BeritaController::class, 'store'])->name('berita.store');
-    Route::get('berita/edit/{uuid}', [BeritaController::class, 'edit'])->name('edit');
+    Route::get('berita/edit/{uuid}', [BeritaController::class, 'edit'])->name('berita.edit');
     Route::resource('berita', BeritaController::class)->only(
         'update',
     );

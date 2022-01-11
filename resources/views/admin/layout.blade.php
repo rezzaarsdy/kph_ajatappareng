@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="{{ URL::asset('assets/dist/css/adminlte.min.css')}}">
   {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
   @stack('css')
-  <link rel="icon" href="https://www.kallagroup.co.id/wp-content/uploads/2021/06/favicon.ico" sizes="32x32" />
+  <link rel="icon" href="{{URL::asset('assets/dist/img/1540276247.jpg')}}" sizes="32x32" />
 </head>
 <body class="hold-transition sidebar-mini">
 
@@ -24,7 +24,7 @@
 	<div class="wrapper">
 	  <!-- Preloader -->
 	  <div class="preloader flex-column justify-content-center align-items-center">
-	    <img class="animation__shake" src="{{ URL::asset('assets/dist/img/AdminLTELogo.png')}}" alt="AdminLTELogo" height="60" width="60">
+	    <img class="animation__shake" src="{{ URL::asset('assets/dist/img/1540276247.jpg')}}" alt="AdminLTELogo" height="60" width="60">
 	  </div>
 		@include('admin.partials.navbar')
 

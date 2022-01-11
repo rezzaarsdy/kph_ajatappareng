@@ -24,7 +24,8 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $profile = Profile::all();
+        $profile = Profile::select('profiles.*', 'profile_categories.id', 'profile_categories.name')
+            ->leftJoin('profile_categories', 'profiles.profile_category_id', '=', 'profile_categories.id')->get();
         return view('admin.profile.index', compact('profile'));
     }
 

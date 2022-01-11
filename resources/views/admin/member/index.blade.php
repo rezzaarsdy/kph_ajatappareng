@@ -31,7 +31,7 @@
             <div class="card">
                 <div class="card-header">
                 <div class="bs-example">
-                    <h3 class="card-title">Admin</h3>
+                    <h3 class="card-title">Anggota</h3>
                     <a href="{{route('member.create')}}" class="btn btn-primary font-weight-bolder float-right">
                         <i class="la la-plus"></i>Tambah Data</a>
                 </div>

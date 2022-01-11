@@ -1,5 +1,9 @@
 @extends('admin.layout')
 
+@push('css')
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+@endpush
+
 @section('content')
 
 <!-- mulai disini content nya -->
@@ -24,31 +28,69 @@
 
     <!-- Main content -->
     <section class="content">
-
-      <!-- Default box -->
-      <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">Title</h3>
-
-          <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-              <i class="fas fa-minus"></i>
-            </button>
-            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-              <i class="fas fa-times"></i>
-            </button>
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <div class="card" style="width: 1300px">
+            <div class="card-header">
+              <strong><h1>Selamat Datang</h1></strong>
+            </div>
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">
+                <p>Di Website Admin KPH Ajatappareng.</p>
+              </blockquote>
+            </div>
           </div>
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3>{{$berita}}<sup style="font-size: 20px"></sup></h3>
+    
+                <p>Berita</p>
+              </div>
+              <div class="icon">
+                <i class="icon ion-document"></i>
+              </div>
+              <a href="{{route('berita.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>{{$galeri}}<sup style="font-size: 20px"></sup></h3>
+    
+                <p>Album</p>
+              </div>
+              <div class="icon">
+                <i class="icon ion-images"></i>
+              </div>
+              <a href="{{route('galeri.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3>{{$member}}<sup style="font-size: 20px"></sup></h3>
+    
+                <p>Anggota</p>
+              </div>
+              <div class="icon">
+                <i class="icon ion-ios-people"></i>
+              </div>
+              <a href="{{route('member.index')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
         </div>
-        <div class="card-body">
-        	HI
-        </div>
-        <!-- /.card-body -->
-        <div class="card-footer">
-          Footer
-        </div>
-        <!-- /.card-footer-->
       </div>
-      <!-- /.card -->
+      
 
     </section>
     <!-- /.content -->

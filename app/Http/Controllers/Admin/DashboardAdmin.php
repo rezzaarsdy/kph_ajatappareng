@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Berita;
+use App\Models\Galery;
+use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +18,10 @@ class DashboardAdmin extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard.index');
+        $berita = Berita::count();
+        $galeri = Galery::count();
+        $member = Member::count();
+        return view('admin.dashboard.index', compact('berita', 'galeri', 'member'));
     }
 
     /**

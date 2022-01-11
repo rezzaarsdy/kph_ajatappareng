@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
 {
+    protected $primaryKey = 'uuid';
+    public $incrementing = false;
     use HasFactory;
     public function profile_category()
     {

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Berita extends Model
 {
+    protected $primaryKey = 'uuid';
+    public $incrementing = false;
     use HasFactory;
     public function berita_category()
     {
