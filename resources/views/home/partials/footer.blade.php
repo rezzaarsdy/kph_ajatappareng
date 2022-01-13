@@ -43,11 +43,11 @@
         <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
             <h4>Contact Us</h4>
             <p>
-            A108 Adam Street <br>
-            New York, NY 535022<br>
-            United States <br><br>
-            <strong>Phone:</strong> +1 5589 55488 55<br>
-            <strong>Email:</strong> info@example.com<br>
+                Jl. Sultan Hasanuddin No 95,<br>
+                Sumpang Binangae, Kec. Barru, Kabupaten Barru,<br>
+                Sulawesi Selatan, 90712<br>
+            <strong>Telepon:</strong> <br>
+            <strong>Email:</strong> <br>
             </p>
 
         </div>
@@ -58,7 +58,7 @@
 
     <div class="container">
     <div class="copyright">
-        &copy; Copyright <strong><span>FlexStart</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>KKN UNHAS GEL 107</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
         <!-- All the links in the footer should remain intact. -->

@@ -109,7 +109,7 @@
             </div>
 
             <div class="col-lg-6">
-            <form action="{{route('inbox.store')}}" method="post" class="php-email-form">
+            <form action="{{route('inbox.store')}}" method="POST" id="quickForm" enctype="multipart/form-data">
                 @csrf
                 <div class="row gy-4">
 
@@ -134,11 +134,7 @@
                 </div>
 
                 <div class="col-md-12 text-center">
-                    <div class="loading">Loading</div>
-                    <div class="error-message"></div>
-                    <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                    <button type="submit">Send Message</button>
+                    <input type="submit" value="Kirim" class="btn btn-success float-right">
                 </div>
 
                 </div>

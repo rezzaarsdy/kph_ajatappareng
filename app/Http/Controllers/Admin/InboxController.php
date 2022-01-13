@@ -43,7 +43,47 @@ class InboxController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'fullname' => 'required',
+            'email' => 'email|required',
+            'phone_number' => 'required',
+            'subject' => 'required',
+            'content' => 'required'
+        ], [
+            'fullname.required' => 'Nama harus diisi',
+            'email.required' => 'Email harus diisi',
+            'phone_number.required' => 'Nomor Telepon harus diisi',
+            'subject.required' => 'Subject harus diisi',
+            'content.required' => 'Isi Pesan harus diisi',
+        ]);
+
+        DB::beginTransaction();
+        try{
+            $uuid = Uuid::uuid4()->getHex();
+            $inbox = new Inbox;
+            $inbox->uuid = $uuid;
+            $inbox->fullname = $request->fullname;
+            $inbox->email = $request->email;
+            $inbox->phone_number = $request->phone_number;
+            $inbox->subject = $request->subject;
+            $inbox->content = $request->content;
+
+            $inbox->save();
+            DB::commit();
+
+            return redirect()->route('beranda')->with([
+                'f_bg' => 'bg-success',
+                'f_title' => 'Berhasil',
+                'f_msg' => 'Pesan Berhasil Dikirim',
+            ]);
+        } catch(Error $e){
+            DB::rollBack();
+            return redirect()->route('beranda')->with([
+                'f_bg' => 'bg-danger',
+                'f_title' => 'Tidak Berhasil.',
+                'f_msg' => 'Pesan Tidak Berhasil Dikirim.',
+            ]);
+        }
     }
 
     /**

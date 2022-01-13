@@ -41,7 +41,7 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
