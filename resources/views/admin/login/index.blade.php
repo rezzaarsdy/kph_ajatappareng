@@ -18,7 +18,7 @@
     <body class="hold-transition login-page">
     <div class="login-box">
     <div class="login-logo">
-        <img src="{{ URL::asset('assets/dist/img/Logo.png')}}" width="200px" height="200px" alt="">
+        <img src="{{ URL::asset('assets/dist/img/Logo.png')}}" width="150px" height="200px" alt="">
         <br>
         <a href="{{route('login')}}"><b>KPH </b>Ajatappareng</a>
     </div>

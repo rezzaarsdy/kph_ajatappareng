@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
-    DashboardController,
+    home\DashboardController,
     Admin\DashboardAdmin,
     Admin\AdminController,
     Admin\LoginController
@@ -30,13 +30,16 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 */
 
 Route::get('/', function () {
-    return redirect()->route('login');
+    return redirect()->route('beranda');
 });
+Route::get('beranda', [DashboardController::class, 'index'])->name('beranda');
+
 Route::get('login', [LoginController::class, 'index'])->name('login');
 Route::post('login', [LoginController::class, 'authenticate'])->name('admin.authenticate');
 Route::middleware(['auth'])->group(function () {
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 });
+
 
 Route::group(['middleware' => ['auth', 'checklevel:1']], function () {
     //routing Superadmin Admin
@@ -87,6 +90,7 @@ Route::group(['middleware' => ['auth', 'checklevel:1,2']], function () {
 
     //routing Index
     Route::get('inbox', [InboxController::class, 'index'])->name('inbox.index');
+    Route::post('inbox', [InboxController::class, 'store'])->name('inbox.store');
 
     //Routing Profile
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
@@ -97,5 +101,4 @@ Route::group(['middleware' => ['auth', 'checklevel:1,2']], function () {
         'update'
     );
     Route::get('profile/delete/{uuid}', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
 });
