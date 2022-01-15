@@ -31,7 +31,7 @@
                     <li><a href="#">test</a></li>
                 </ul>
             </li>
-            <li><a class="nav-link scrollto" href="#services">Galeri</a></li>
+            <li><a class="nav-link {{ (request()->routeIs('galeri_home.index')) ? 'active' : '' }}" href="{{route('galeri.home')}}">Galeri</a></li>
             <li><a class="nav-link {{ (request()->routeIs('inbox.create')) ? 'active' : '' }}" href="{{route('inbox.create')}}">Kontak</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>

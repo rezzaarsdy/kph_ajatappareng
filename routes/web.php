@@ -12,6 +12,7 @@ use App\Http\Controllers\admin\GaleriController;
 use App\Http\Controllers\admin\InboxController;
 use App\Http\Controllers\admin\MemberController;
 use App\Http\Controllers\admin\ProfileController;
+use App\Http\Controllers\home\GaleriHome;
 use App\Models\Berita;
 use App\Models\Member;
 use App\Models\Profile;
@@ -36,6 +37,7 @@ Route::get('beranda', [DashboardController::class, 'index'])->name('beranda');
 Route::post('inbox', [InboxController::class, 'store'])->name('inbox.store');
 Route::get('kontak', [InboxController::class, 'create'])->name('inbox.create');
 Route::get('berita/show/{uuid}', [BeritaController::class, 'show'])->name('berita.show');
+Route::get('dokumentasi', [GaleriHome::class, 'index'])->name('galeri.home');
 
 
 //login
