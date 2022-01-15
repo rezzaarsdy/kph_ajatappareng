@@ -32,7 +32,7 @@ class InboxController extends Controller
      */
     public function create()
     {
-        //
+        return view('home.kontak.index');
     }
 
     /**

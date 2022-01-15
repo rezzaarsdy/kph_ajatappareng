@@ -5,6 +5,8 @@ namespace App\Http\Controllers\home;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\{
+    Berita,
+    Galery,
     Profile,
     Profile_category
 };
@@ -20,7 +22,9 @@ class DashboardController extends Controller
     {
         $profile = Profile::select('profiles.*', 'profile_categories.id', 'profile_categories.name')
             ->leftJoin('profile_categories', 'profiles.profile_category_id', '=', 'profile_categories.id')->get();
-        return view('home.home.index', compact('profile'));
+        $berita = Berita::orderBy('created_at', 'desc')->paginate(3);
+        $galery = Galery::orderBy('created_at', 'desc')->paginate(3);
+        return view('home.home.index', compact('profile', 'berita', 'galery'));
     }
 
     /**

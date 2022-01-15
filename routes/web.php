@@ -34,7 +34,11 @@ Route::get('/', function () {
 });
 Route::get('beranda', [DashboardController::class, 'index'])->name('beranda');
 Route::post('inbox', [InboxController::class, 'store'])->name('inbox.store');
+Route::get('kontak', [InboxController::class, 'create'])->name('inbox.create');
+Route::get('berita/show/{uuid}', [BeritaController::class, 'show'])->name('berita.show');
 
+
+//login
 Route::get('login', [LoginController::class, 'index'])->name('login');
 Route::post('login', [LoginController::class, 'authenticate'])->name('admin.authenticate');
 Route::middleware(['auth'])->group(function () {
@@ -91,6 +95,7 @@ Route::group(['middleware' => ['auth', 'checklevel:1,2']], function () {
 
     //routing Index
     Route::get('inbox', [InboxController::class, 'index'])->name('inbox.index');
+    Route::get('inbox/delete/{uuid}', [InboxController::class, 'destroy'])->name('inbox.destroy');
 
     //Routing Profile
     Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
