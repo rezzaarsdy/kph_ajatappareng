@@ -19,7 +19,7 @@
                     </div>
                     <div class="card-body">
                         <h4 class="post-title fw-bold fs-3 text-center">{{$berita->title}}</h4>
-                        {{$berita->content}}
+                        {!! $berita->content !!}
                         <div class="text-center mt-5">
                             <a href="#" class="text-dark mx-2 my-2">
                                 <i class="bi bi-people"> {{$berita->name}} </i>
@@ -53,18 +53,18 @@
                         @foreach ($berita_populer as $item)
                             <div class="col-md-3">
                                 <div class="overflow-hidder img-info-side">
-                                    <img src="{{asset('storage/Berita/'.$berita->img)}}" alt="" class="card-img mt-3 img-thumbnail">
+                                    <img src="{{asset('storage/Berita/'.$item->img)}}" alt="" class="card-img mt-3 img-thumbnail">
                                 </div>
                             </div>
                             <div class="col-md-9">
                                 <div class="card-body">
                                     <h6 class="post-title">
-                                        <a href="{{route('berita_home.show', $berita->uuid)}}" class="text-dark fs-5">
-                                            {{$berita->title}}
+                                        <a href="{{route('berita_home.show', $item->uuid)}}" class="text-dark fs-5">
+                                            {{$item->title}}
                                         </a>
                                     </h6>
                                     <p class="card-text">
-                                        <small class="text-muted">{{$berita->created_at->isoFormat('D MMM Y')}}</small>
+                                        <small class="text-muted">{{$item->created_at->isoFormat('D MMM Y')}}</small>
                                     </p>
                                 </div>
                             </div>

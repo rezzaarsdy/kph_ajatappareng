@@ -1,7 +1,11 @@
 @extends('admin.layout')
 
 @push('css')
-<link rel="stylesheet" href="{{URL::asset('assets/dist/css/upload-data.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('assets/dist/css/upload-data.css')}}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha256-aAr2Zpq8MZ+YA/D6JtRD3xtrwpEz2IqOS+pWD/7XKIw=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha256-OFRAJNoaD8L3Br5lglV7VyLRf0itmoBzWUoM+Sji4/8=" crossorigin="anonymous"></script>
+
 @endpush
 
 @section('content')
@@ -114,7 +118,7 @@
                         <div class="form-group">
                             <label>Content:</label>
                             @error('content') <span style="font-size: 12px; color:red; display: block;">{{ $message }}</span> @enderror
-                            <textarea class="form-control" style="height:50px" value="{{$berita->content}}" name="content"></textarea>
+                            <textarea class="form-control tinymce-editor" style="height:50px" value="{{$berita->content}}" name="content"></textarea>
                         </div>
                     </div>
                     <!-- /.card-body -->
@@ -142,4 +146,25 @@
 
 @push('javascript')
     <script src="{{ URL::asset('assets/dist/js/upload.js') }}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>  
+    <script type="text/javascript">
+        tinymce.init({
+            selector: 'textarea.tinymce-editor',
+            height: 100,
+            menubar: false,
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste code help wordcount'
+            ],
+            toolbar: 'undo redo | formatselect | ' +
+                'bold italic underline backcolor | alignleft aligncenter ' +
+                'alignright alignjustify | bullist numlist outdent indent | ' +
+                'removeformat | help',
+            content_css: '//www.tiny.cloud/css/codepen.min.css'
+        });
+    </script>
 @endpush 
