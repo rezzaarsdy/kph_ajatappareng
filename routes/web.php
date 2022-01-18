@@ -12,6 +12,7 @@ use App\Http\Controllers\admin\GaleriController;
 use App\Http\Controllers\admin\InboxController;
 use App\Http\Controllers\admin\MemberController;
 use App\Http\Controllers\admin\ProfileController;
+use App\Http\Controllers\home\BeritaHome;
 use App\Http\Controllers\home\GaleriHome;
 use App\Models\Berita;
 use App\Models\Member;
@@ -36,9 +37,10 @@ Route::get('/', function () {
 Route::get('beranda', [DashboardController::class, 'index'])->name('beranda');
 Route::post('inbox', [InboxController::class, 'store'])->name('inbox.store');
 Route::get('kontak', [InboxController::class, 'create'])->name('inbox.create');
-Route::get('berita/show/{uuid}', [BeritaController::class, 'show'])->name('berita.show');
+Route::get('informasi/show/{uuid}', [BeritaHome::class, 'show'])->name('berita_home.show');
 Route::get('dokumentasi', [GaleriHome::class, 'index'])->name('galeri.home');
-Route::get('berita/{id}', [DashboardController::class, 'edit'])->name('berita_home.edit');
+Route::get('informasi', [BeritaHome::class, 'index'])->name('berita_home.index');
+Route::get('berita/{id}', [BeritaHome::class, 'edit'])->name('berita_home.edit');
 
 
 //login
@@ -76,15 +78,15 @@ Route::group(['middleware' => ['auth', 'checklevel:1,2']], function () {
     Route::get('member/delete/{uuid}', [MemberController::class, 'destroy'])->name('member.destroy');
 
 
-    //routing berita
-    Route::get('berita', [BeritaController::class, 'index'])->name('berita.index');
-    Route::get('berita/create', [BeritaController::class, 'create'])->name('berita.create');
-    Route::post('berita/create', [BeritaController::class, 'store'])->name('berita.store');
-    Route::get('berita/edit/{uuid}', [BeritaController::class, 'edit'])->name('berita.edit');
-    Route::resource('berita', BeritaController::class)->only(
+    //routing berita admin
+    Route::get('news', [BeritaController::class, 'index'])->name('berita.index');
+    Route::get('news/create', [BeritaController::class, 'create'])->name('berita.create');
+    Route::post('news/create', [BeritaController::class, 'store'])->name('berita.store');
+    Route::get('news/edit/{uuid}', [BeritaController::class, 'edit'])->name('berita.edit');
+    Route::resource('news', BeritaController::class)->only(
         'update',
     );
-    Route::get('berita/delete/{uuid}', [BeritaController::class, 'destroy'])->name('berita.destroy');
+    Route::get('news/delete/{uuid}', [BeritaController::class, 'destroy'])->name('berita.destroy');
 
     //Routing Galeri
     Route::get('galeri', [GaleriController::class, 'index'])->name('galeri.index');

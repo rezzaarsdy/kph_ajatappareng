@@ -9,6 +9,7 @@ class Berita extends Model
 {
     protected $primaryKey = 'uuid';
     public $incrementing = false;
+    protected $fillable = ['view'];
     use HasFactory;
     public function berita_category()
     {

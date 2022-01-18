@@ -13,33 +13,27 @@
 
         <div class="row">
             <div class="col-sm-8">
-                @foreach ($berita as $data)
-                    <div class="card shadow mb-5 bg-white rounded" data-aos="zoom-in">
-                        <div class="post-box">
-                            <div class="post-img" style="height: 300px">
-                                <img src="{{asset('storage/Berita/'.$data->img)}}" class="img-fluid" alt="">
-                            </div>
-                            <span class="post-date">{{$data->created_at->isoFormat('dddd, D MMMM Y')}}</span>
-                            <h3 class="post-title">{{$data->title}}</h3>
-                            <a href="{{route('berita_home.show', $data->uuid)}}" class="readmore stretched-link mt-auto"></a>
-                            <div >
-                                <a href="#" class="text-dark mx-2 my-2">
-                                    <i class="bi bi-people"> {{$data->name}} </i>
-                                </a>
+                <div class="post-box shadow mb-5 bg-white rounded" data-aos="zoom-in">
+                    <div class="overflow-hidden">
+                        <img src="{{asset('storage/Berita/'.$berita->img)}}" class="card-img-top" alt="">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="post-title fw-bold fs-3 text-center">{{$berita->title}}</h4>
+                        {{$berita->content}}
+                        <div class="text-center mt-5">
+                            <a href="#" class="text-dark mx-2 my-2">
+                                <i class="bi bi-people"> {{$berita->name}} </i>
+                            </a>
 
-                                <a href="" class="text-dark mx-2 my-2">
-                                    @if($data->view != 0)
-                                    <i class="bi bi-eye"> {{$data->view}}</i>
-                                    @else
-                                    <i class="bi bi-eye"> 0</i>
-                                    @endif
-                                </a>
-                            </div>
+                            <a href="" class="text-dark mx-2 my-2">
+                                <i class="bi bi-eye"> {{$berita->view}}</i>
+                            </a>
                         </div>
                     </div>
-                @endforeach
+                </div>
             </div>
 
+            
             <div class="col sm-4">
                 <div class="card shadow p-3 mb-5 bg-white rounded">
                     <div class="row">
@@ -56,21 +50,21 @@
 
                     <div class="row no-gutters">
                         <h6 style="font-weight: bold;" class="text-dark fs-5">Informasi Terpopuler</h6>
-                        @foreach ($berita as $item)
+                        @foreach ($berita_populer as $item)
                             <div class="col-md-3">
                                 <div class="overflow-hidder img-info-side">
-                                    <img src="{{asset('storage/Berita/'.$item->img)}}" alt="" class="card-img mt-3 img-thumbnail">
+                                    <img src="{{asset('storage/Berita/'.$berita->img)}}" alt="" class="card-img mt-3 img-thumbnail">
                                 </div>
                             </div>
                             <div class="col-md-9">
                                 <div class="card-body">
                                     <h6 class="post-title">
-                                        <a href="{{route('berita_home.show', $item->uuid)}}" class="text-dark fs-5">
-                                            {{$item->title}}
+                                        <a href="{{route('berita_home.show', $berita->uuid)}}" class="text-dark fs-5">
+                                            {{$berita->title}}
                                         </a>
                                     </h6>
                                     <p class="card-text">
-                                        <small class="text-muted">{{$item->created_at->isoFormat('D MMM Y')}}</small>
+                                        <small class="text-muted">{{$berita->created_at->isoFormat('D MMM Y')}}</small>
                                     </p>
                                 </div>
                             </div>
@@ -79,7 +73,7 @@
 
                     <div class="row no-gutters">
                         <h6 style="font-weight: bold;" class="text-dark fs-5">Informasi Terbaru</h6>
-                        @foreach ($berita_populer as $item)
+                        @foreach ($berita_terbaru as $item)
                             <div class="col-md-3">
                                 <div class="overflow-hidder img-info-side">
                                     <img src="{{asset('storage/Berita/'.$item->img)}}" alt="" class="card-img mt-3 img-thumbnail">
@@ -101,9 +95,8 @@
                     </div>
                 </div>
             </div>
-            
         </div>
     </div>
+
 </section>
-<!-- End Recent Posts Section -->
 @endsection
