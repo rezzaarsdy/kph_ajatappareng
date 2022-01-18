@@ -38,6 +38,7 @@ Route::post('inbox', [InboxController::class, 'store'])->name('inbox.store');
 Route::get('kontak', [InboxController::class, 'create'])->name('inbox.create');
 Route::get('berita/show/{uuid}', [BeritaController::class, 'show'])->name('berita.show');
 Route::get('dokumentasi', [GaleriHome::class, 'index'])->name('galeri.home');
+Route::get('berita/{id}', [DashboardController::class, 'edit'])->name('berita_home.edit');
 
 
 //login

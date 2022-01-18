@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Inbox;
+use App\Models\Berita_category;
 use File;
 use DB;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +33,8 @@ class InboxController extends Controller
      */
     public function create()
     {
-        return view('home.kontak.index');
+        $berita_kategori = Berita_category::all();
+        return view('home.kontak.index', compact('berita_kategori'));
     }
 
     /**

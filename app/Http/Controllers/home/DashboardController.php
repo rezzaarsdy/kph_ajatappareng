@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\{
     Berita,
+    Berita_category,
     Galery,
     Profile,
     Profile_category
@@ -20,11 +21,12 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $berita_kategori = Berita_category::all();
         $profile = Profile::select('profiles.*', 'profile_categories.id', 'profile_categories.name')
             ->leftJoin('profile_categories', 'profiles.profile_category_id', '=', 'profile_categories.id')->get();
         $berita = Berita::orderBy('created_at', 'desc')->paginate(3);
         $galery = Galery::orderBy('created_at', 'desc')->paginate(3);
-        return view('home.home.index', compact('profile', 'berita', 'galery'));
+        return view('home.home.index', compact('profile', 'berita', 'galery', 'berita_kategori'));
     }
 
     /**
@@ -45,7 +47,7 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        
+        //
     }
 
     /**
@@ -67,7 +69,9 @@ class DashboardController extends Controller
      */
     public function edit($id)
     {
-        //
+        $berita_kategori = Berita_category::all();
+        $berita = Berita::where('berita_category_id', $id)->get();
+        return view('home.berita.index', compact('berita', 'berita_kategori'));
     }
 
     /**

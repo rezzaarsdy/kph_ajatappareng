@@ -5,6 +5,7 @@ namespace App\Http\Controllers\home;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Galery;
+use App\Models\Berita_category;
 
 class GaleriHome extends Controller
 {
@@ -15,8 +16,9 @@ class GaleriHome extends Controller
      */
     public function index()
     {
+        $berita_kategori = Berita_category::all();
         $galery = Galery::orderBy('created_at', 'desc')->get();
-        return view('home.galeri.index', compact('galery'));
+        return view('home.galeri.index', compact('galery', 'berita_kategori'));
     }
 
     /**

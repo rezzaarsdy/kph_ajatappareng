@@ -26,10 +26,14 @@
                     <li><a href="#">Lainnya</a></li>
                 </ul>
             </li>
-            <li class="dropdown"><a href="#"><span>Berita</span> <i class="bi bi-chevron-down"></i></a>
-                <ul>
-                    <li><a href="#">test</a></li>
-                </ul>
+            <li class="dropdown"><a href=""><span>Berita</span> <i class="bi bi-chevron-down"></i></a>
+                
+                    <ul>
+                        <li><a href="">Semuanya</a></li>
+                        @foreach($berita_kategori as $item)
+                            <li><a href="{{route('berita_home.edit', $item->id)}}">{{$item->name}}</a></li>
+                        @endforeach
+                    </ul>
             </li>
             <li><a class="nav-link {{ (request()->routeIs('galeri_home.index')) ? 'active' : '' }}" href="{{route('galeri.home')}}">Galeri</a></li>
             <li><a class="nav-link {{ (request()->routeIs('inbox.create')) ? 'active' : '' }}" href="{{route('inbox.create')}}">Kontak</a></li>
