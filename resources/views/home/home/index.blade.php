@@ -7,8 +7,8 @@
 
     <div class="container">
     <div class="row">
-        <div class="col-lg-6 d-flex flex-column justify-content-center">
-            <h1 data-aos="fade-up ">Logo</h1>
+        <div class="col-lg-6 d-flex flex-column justify-content-center ">
+            <h1 data-aos="fade-up text-bold">Logo</h1>
             <h2 data-aos="fade-up" data-aos-delay="400">KPH Ajatappareng</h2>
         </div>
         <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
@@ -25,29 +25,17 @@
         <div class="container" data-aos="fade-up">
             <div class="row feture-tabs" data-aos="fade-up">
                 <div class="col-lg-6">
-                    <h3>Visi dan Misi UPT KPH Ajatappareng</h3>
-
-                    <div class="tab-content text-center">
-                        <p class="text-center"> Visi</p>
+                    <header class="section-header">
+                        <p>Visi dan Misi UPT KPH Ajatappareng</p>
+                    </header>
+                    <div class="tab-content">
                         <p>
                             @foreach ($profile as $data)
-                                @if($data->profile_category_id == 2)
-                                    {{$data->content}}
+                                @if($data->profile_category_id == 1)
+                                    {!!$data->content!!}
                                 @endif
                             @endforeach
                         </p>
-                    </div>
-
-                    <div class="tab-content text-center">
-                        <p class="text-center"> Misi</p>
-                        <p>
-                            @foreach ($profile as $data)
-                            @if($data->profile_category_id == 3)
-                                {{$data->content}}
-                            @endif
-                        @endforeach 
-                        </p>
-                    </p>
                     </div>
 
                 </div>

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\home;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\{
     Berita,
     Berita_category,
@@ -11,8 +10,9 @@ use App\Models\{
     Profile,
     Profile_category
 };
+use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class ProfileHome extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,13 +21,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $berita_kategori = Berita_category::all();
-        $profile_kategori = Profile_category::all();
-        $profile = Profile::select('profiles.*', 'profile_categories.id', 'profile_categories.name')
-            ->leftJoin('profile_categories', 'profiles.profile_category_id', '=', 'profile_categories.id')->get();
-        $berita = Berita::orderBy('created_at', 'desc')->paginate(3);
-        $galery = Galery::orderBy('created_at', 'desc')->paginate(3);
-        return view('home.home.index', compact('profile', 'berita', 'galery', 'berita_kategori', 'profile_kategori'));
+        //
     }
 
     /**
@@ -70,7 +64,13 @@ class DashboardController extends Controller
      */
     public function edit($id)
     {
-        //
+        $berita_kategori = Berita_category::all();
+        $profile_kategori = Profile_category::all();
+        $title = Profile_category::where('id', $id)->value('name');
+        $profile_content = Profile::where('profile_category_id', $id)->value('content');
+        $profile = Profile::select('profiles.*', 'profile_categories.id', 'profile_categories.name')
+            ->leftJoin('profile_categories', 'profiles.profile_category_id', '=', 'profile_categories.id')->get();
+        return view('home.profile.show', compact('profile', 'profile_content', 'berita_kategori', 'profile_kategori', 'title'));
     }
 
     /**

@@ -102,7 +102,7 @@ class ProfileController extends Controller
     {
         $profile = Profile::findOrFail($uuid);
         $kategori = Profile_category::all();
-        return view('admin.profile.add', compact('profile', 'kategori'));
+        return view('admin.profile.edit', compact('profile', 'kategori'));
     }
 
     /**

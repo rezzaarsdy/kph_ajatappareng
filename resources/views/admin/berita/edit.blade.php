@@ -22,8 +22,8 @@
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="{{route('berita.index'))}}">Berita</a></li>
-            <li class="breadcrumb-item active">Create</li>
+            <li class="breadcrumb-item"><a href="{{route('berita.index')}}">Berita</a></li>
+            <li class="breadcrumb-item active">Edit</li>
             </ol>
         </div>
         </div>
@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('berita.upload', $berita->uuid) }}" method="POST" id="quickForm" enctype="multipart/form-data">
+                        <form action="{{ route('news.update', $berita->uuid) }}" method="POST" id="quickForm" enctype="multipart/form-data">
                             @csrf
                             @method('PUT') 
                             <div class="form-group" id="form1">
@@ -118,7 +118,7 @@
                         <div class="form-group">
                             <label>Content:</label>
                             @error('content') <span style="font-size: 12px; color:red; display: block;">{{ $message }}</span> @enderror
-                            <textarea class="form-control tinymce-editor" style="height:50px" value="{{$berita->content}}" name="content"></textarea>
+                            <textarea class="form-control tinymce-editor" style="height:50px" value="{{ old('content') }}" name="content">{{$berita->content}}</textarea>
                         </div>
                     </div>
                     <!-- /.card-body -->

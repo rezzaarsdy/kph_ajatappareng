@@ -17,7 +17,7 @@ class CreateProfilesTable extends Migration
             $table->id();
             $table->uuid('uuid')->unique();
             $table->foreignId('profile_category_id');
-            $table->string('content');
+            $table->text('content');
             $table->timestamps();
         });
     }

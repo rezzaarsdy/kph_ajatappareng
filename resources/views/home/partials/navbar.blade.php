@@ -11,9 +11,10 @@
             <li><a class="nav-link {{ (request()->routeIs('beranda')) ? 'active' : '' }}" href="{{route('beranda')}}">Beranda</a></li>
             <li class="dropdown"><a href="#"><span>Profil</span> <i class="bi bi-chevron-down"></i></a>
                 <ul>
-                    <li><a href="#">Visi dan Misi</a></li>
-                    <li><a href="#">Tentang Kami</a></li>
-                    <li><a href="#">Struktur</a></li>
+                    @foreach($profile_kategori as $item)
+                        <li><a href="{{route('profile_home.edit', $item->id)}}">{{$item->name}}</a></li>
+                    @endforeach
+                    <li><a href="#">Struktur Organisasi</a></li>
                     <li><a href="#">Sumber Daya Manusia</a></li>
                 </ul>
             </li>

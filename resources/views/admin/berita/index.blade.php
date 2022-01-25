@@ -57,7 +57,7 @@
                             <td>{{$data->title}}</td>
                             <td>{{$data->name}}</td>
                             <td><img width="100px" height="100px" src="{{asset('storage/Berita/'.$data->img)}}" alt=""></td>
-                            <td> 0 </td>
+                            <td>{{$data->view}}</td>
                             <td>
                                 <a class="badge badge-info m-1" href="{{route('berita.edit', $data->uuid)}}">
                                     <span class="fa fa-edit"></span> Edit

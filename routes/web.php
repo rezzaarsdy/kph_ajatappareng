@@ -1,19 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{
-    home\DashboardController,
-    Admin\DashboardAdmin,
-    Admin\AdminController,
-    Admin\LoginController
+use App\Http\Controllers\Admin\{
+    DashboardAdmin,
+    AdminController,
+    LoginController,
+    BeritaController,
+    GaleriController,
+    InboxController,
+    MemberController,
+    ProfileController
 };
-use App\Http\Controllers\admin\BeritaController;
-use App\Http\Controllers\admin\GaleriController;
-use App\Http\Controllers\admin\InboxController;
-use App\Http\Controllers\admin\MemberController;
-use App\Http\Controllers\admin\ProfileController;
-use App\Http\Controllers\home\BeritaHome;
-use App\Http\Controllers\home\GaleriHome;
+use App\Http\Controllers\home\{
+    DashboardController,
+    BeritaHome,
+    GaleriHome,
+    ProfileHome
+};
 use App\Models\Berita;
 use App\Models\Member;
 use App\Models\Profile;
@@ -41,6 +44,7 @@ Route::get('informasi/show/{uuid}', [BeritaHome::class, 'show'])->name('berita_h
 Route::get('dokumentasi', [GaleriHome::class, 'index'])->name('galeri.home');
 Route::get('informasi', [BeritaHome::class, 'index'])->name('berita_home.index');
 Route::get('berita/{id}', [BeritaHome::class, 'edit'])->name('berita_home.edit');
+Route::get('profil/{id}', [ProfileHome::class, 'edit'])->name('profile_home.edit');
 
 
 //login
