@@ -22,6 +22,7 @@ class BeritaHome extends Controller
     public function index()
     {
         $berita_kategori = Berita_category::all();
+        $profile_kategori = Profile_category::all();
         $profile = Profile::select('profiles.*', 'profile_categories.id', 'profile_categories.name')
             ->leftJoin('profile_categories', 'profiles.profile_category_id', '=', 'profile_categories.id')->get();
         $berita = Berita::select('beritas.*', 'users.id', 'users.name')
@@ -33,6 +34,7 @@ class BeritaHome extends Controller
         return view('home.berita.index', compact(
             'profile',
             'berita',
+            'profile_kategori',
             'galery',
             'berita_kategori',
             'berita_terbaru',

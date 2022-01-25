@@ -45,6 +45,8 @@ Route::get('dokumentasi', [GaleriHome::class, 'index'])->name('galeri.home');
 Route::get('informasi', [BeritaHome::class, 'index'])->name('berita_home.index');
 Route::get('berita/{id}', [BeritaHome::class, 'edit'])->name('berita_home.edit');
 Route::get('profil/{id}', [ProfileHome::class, 'edit'])->name('profile_home.edit');
+Route::get('struktur-organisasi/', [ProfileHome::class, 'struktur'])->name('profile_home.struktur');
+Route::get('sumber-daya/', [ProfileHome::class, 'sumberdaya'])->name('profile_home.sumberdaya');
 
 
 //login

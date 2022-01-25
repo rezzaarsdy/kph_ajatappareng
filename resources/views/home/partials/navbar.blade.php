@@ -14,8 +14,8 @@
                     @foreach($profile_kategori as $item)
                         <li><a href="{{route('profile_home.edit', $item->id)}}">{{$item->name}}</a></li>
                     @endforeach
-                    <li><a href="#">Struktur Organisasi</a></li>
-                    <li><a href="#">Sumber Daya Manusia</a></li>
+                    <li><a href="{{route('profile_home.struktur')}}">Struktur Organisasi</a></li>
+                    <li><a href="{{route('profile_home.sumberdaya')}}">Sumber Daya Manusia</a></li>
                 </ul>
             </li>
             <li class="dropdown"><a href="#"><span>Perhutanan Sosial</span> <i class="bi bi-chevron-down"></i></a>
