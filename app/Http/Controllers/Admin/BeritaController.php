@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Error;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Str;
+use \Cviebrock\EloquentSluggable\Services\SlugService;
 
 class BeritaController extends Controller
 {
@@ -48,6 +49,7 @@ class BeritaController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
+            'slug' => 'required|unique:beritas',
             'berita_category_id' => 'required',
             'file' => 'file|image|mimes:jpeg,png,jpg|max:2048',
             'content' => 'required'
@@ -64,6 +66,7 @@ class BeritaController extends Controller
             $berita = new Berita;
             $berita->uuid = $uuid;
             $berita->title = $request->title;
+            $berita->slug = $request->slug;
             $berita->berita_category_id = $request->berita_category_id;
             $berita->user_id = Auth()->user()->id;
             $berita->content = $request->content;
@@ -122,24 +125,29 @@ class BeritaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $uuid)
+    public function update(Request $request, $uuid, Berita $berita)
     {
         $berita = Berita::findOrFail($uuid);
-        $this->validate($request, [
+        $rules = [
             'title' => 'required',
             'berita_category_id' => 'required',
-            'file' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
+            'file' => 'file|image|mimes:jpeg,png,jpg|max:2048',
             'content' => 'required'
-        ], [
+        ];[
             'title.required' => 'Judul harus diisi',
             'berita_category_id.required' => 'Kategori berita harus diisi',
             'file.mimes' => 'File Harus Bertipe JPG/JPEG/PNG',
             'content.required' => 'Isi Berita harus diisi'
-        ]);
+        ];
+        if($request->slug != $berita->slug){
+            $rules['slug'] = 'required|unique:beritas';
+        }
+        $validateData = $request->validate($rules);
 
         DB::beginTransaction();
         try{
             $berita->title = $request->title;
+            $berita->slug = $request->slug;
             $berita->berita_category_id = $request->berita_category_id;
             $berita->content = $request->content;
 
@@ -198,5 +206,10 @@ class BeritaController extends Controller
                 'f_msg' => 'Data Tidak Berhasil Dihapus',
             ]);
         }
+    }
+
+    public function checkSlug(Request $request){
+        $slug = SlugService::createSlug(Berita::class, 'slug', $request->title);
+        return response()->json(['slug' => $slug]);
     }
 }

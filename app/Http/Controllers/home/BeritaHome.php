@@ -69,18 +69,20 @@ class BeritaHome extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($uuid)
+    public function show(Berita $slug)
     {
+        
         $berita_kategori = Berita_category::all();
-        $berita = Berita::select('beritas.*', 'users.id', 'users.name')
+        $profile_kategori = Profile_category::all();
+        $berita = $slug::select('beritas.*', 'users.id', 'users.name')
             ->leftJoin('users', 'beritas.user_id', '=', 'users.id')
-            ->findOrFail($uuid);
+            ->findOrFail($slug->uuid);
         $view = $berita->view + 1;
         $dataInfo = ['view' => $view];
         $berita->update($dataInfo);
         $berita_terbaru = Berita::orderBy('created_at', 'desc')->paginate(3);
         $berita_populer = Berita::orderBy('view', 'desc')->paginate(3);
-        return view('home.berita.show', compact('berita', 'berita_kategori', 'berita_terbaru', 'berita_populer'));
+        return view('home.berita.show', compact('berita', 'berita_kategori', 'berita_terbaru', 'berita_populer', 'profile_kategori'));
     }
 
     /**
@@ -92,11 +94,12 @@ class BeritaHome extends Controller
     public function edit($id)
     {
         $berita_kategori = Berita_category::all();
+        $profile_kategori = Profile_category::all();
         $berita = Berita::where('berita_category_id', $id)
             ->orderBy('created_at', 'desc')->paginate(4);
         $berita_terbaru = Berita::orderBy('created_at', 'desc')->paginate(3);
         $berita_populer = Berita::orderBy('view', 'desc')->paginate(3);
-        return view('home.berita.index', compact('berita', 'berita_kategori', 'berita_terbaru', 'berita_populer'));
+        return view('home.berita.index', compact('berita', 'berita_kategori', 'berita_terbaru', 'berita_populer', 'profile_kategori'));
     }
 
     /**

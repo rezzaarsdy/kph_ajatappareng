@@ -12,7 +12,7 @@
             <li class="dropdown"><a href="#"><span>Profil</span> <i class="bi bi-chevron-down"></i></a>
                 <ul>
                     @foreach($profile_kategori as $item)
-                        <li><a href="{{route('profile_home.edit', $item->id)}}">{{$item->name}}</a></li>
+                        <li><a href="{{route('profile_home.edit', $item->slug)}}">{{$item->name}}</a></li>
                     @endforeach
                     <li><a href="{{route('profile_home.struktur')}}">Struktur Organisasi</a></li>
                     <li><a href="{{route('profile_home.sumberdaya')}}">Sumber Daya Manusia</a></li>

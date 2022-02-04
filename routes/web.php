@@ -40,13 +40,16 @@ Route::get('/', function () {
 Route::get('beranda', [DashboardController::class, 'index'])->name('beranda');
 Route::post('inbox', [InboxController::class, 'store'])->name('inbox.store');
 Route::get('kontak', [InboxController::class, 'create'])->name('inbox.create');
-Route::get('informasi/show/{uuid}', [BeritaHome::class, 'show'])->name('berita_home.show');
+Route::get('informasi/{slug}', [BeritaHome::class, 'show'])->name('berita_home.show');
 Route::get('dokumentasi', [GaleriHome::class, 'index'])->name('galeri.home');
 Route::get('informasi', [BeritaHome::class, 'index'])->name('berita_home.index');
-Route::get('berita/{id}', [BeritaHome::class, 'edit'])->name('berita_home.edit');
+Route::get('informasi/{id}', [BeritaHome::class, 'edit'])->name('berita_home.edit');
 Route::get('profil/{id}', [ProfileHome::class, 'edit'])->name('profile_home.edit');
 Route::get('struktur-organisasi/', [ProfileHome::class, 'struktur'])->name('profile_home.struktur');
 Route::get('sumber-daya/', [ProfileHome::class, 'sumberdaya'])->name('profile_home.sumberdaya');
+
+//slug
+Route::get('/berita/checkslug', [BeritaController::class, 'checkSlug'])->name('checkSlug');
 
 
 //login

@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-lg-6 d-flex flex-column justify-content-center ">
             <h1 data-aos="fade-up text-bold">Logo</h1>
-            <h2 data-aos="fade-up" data-aos-delay="400">KPH Ajatappareng</h2>
+            <h2 data-aos="fade-up" data-aos-delay="400">UPT KPH Ajatappareng</h2>
         </div>
         <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
             <img src="{{ URL::asset('assets/dist/img/1540276247.jpg')}}" class="img-fluid" alt="">
@@ -65,7 +65,8 @@
                         <div class="post-img"><img src="{{asset('storage/Berita/'.$data->img)}}" class="img-fluid" alt=""></div>
                         <span class="post-date">{{$data->created_at->isoFormat('dddd, D MMMM Y')}}</span>
                         <h3 class="post-title">{{$data->title}}</h3>
-                        <a href="{{route('berita_home.show', $data->uuid)}}" class="readmore stretched-link mt-auto"><span>Selengkapnya</span><i class="bi bi-arrow-right"></i></a>
+                        <h6>{!! Str::limit($data->content, 40) !!}</h6>
+                        <a href="{{route('berita_home.show', $data->slug)}}" class="readmore stretched-link mt-auto"><span>Selengkapnya</span><i class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
                 @endforeach

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Inbox;
 use App\Models\Berita_category;
+use App\Models\Profile_category;
 use File;
 use DB;
 use Illuminate\Support\Facades\Auth;
@@ -33,8 +34,9 @@ class InboxController extends Controller
      */
     public function create()
     {
+        $profile_kategori = Profile_category::all();
         $berita_kategori = Berita_category::all();
-        return view('home.kontak.index', compact('berita_kategori'));
+        return view('home.kontak.index', compact('berita_kategori', 'profile_kategori'));
     }
 
     /**
@@ -60,7 +62,7 @@ class InboxController extends Controller
         ]);
 
         DB::beginTransaction();
-        try{
+        try {
             $uuid = Uuid::uuid4()->getHex();
             $inbox = new Inbox;
             $inbox->uuid = $uuid;
@@ -78,7 +80,7 @@ class InboxController extends Controller
                 'f_title' => 'Berhasil',
                 'f_msg' => 'Pesan Berhasil Dikirim',
             ]);
-        } catch(Error $e){
+        } catch (Error $e) {
             DB::rollBack();
             return redirect()->route('beranda')->with([
                 'f_bg' => 'bg-danger',
@@ -131,7 +133,7 @@ class InboxController extends Controller
     public function destroy($uuid)
     {
         DB::beginTransaction();
-        try{
+        try {
             $inbox = Inbox::findOrFail($uuid);
             $inbox->delete();
             DB::commit();

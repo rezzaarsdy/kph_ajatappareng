@@ -54,6 +54,12 @@
                                 <input type="name" min="0" id="title" name="title" value="{{ $berita->title }}" class="form-control" placeholder="Masukkan Judul Berita" >
                             </div>
 
+                            <div class="form-group" id="form1">
+                                <label>Slug</label>
+                                @error('slug') <span style="font-size: 12px; color:red; display: block;">{{ $message }}</span> @enderror
+                                <input type="name" min="0" id="slug" name="slug" value="{{ $berita->slug }}" class="form-control" disabled readonly>
+                            </div>
+
                             <div class="form-group">
                                 <label>Kategori Berita</label>
                                 @error('berita_category_id') <span style="font-size: 12px; color:red; display: block;">{{ $message }}</span> @enderror
@@ -167,4 +173,16 @@
             content_css: '//www.tiny.cloud/css/codepen.min.css'
         });
     </script>
+
+    
+<script>
+    const title = document.querySelector('#title');
+    const slug = document.querySelector('#slug');
+
+    title.addEventListener('change', function() {
+        fetch('/berita/checkslug?title=' + title.value)
+            .then(response => response.json())
+            .then(data => slug.value = data.slug)
+    });
+</script>
 @endpush 

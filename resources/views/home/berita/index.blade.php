@@ -21,7 +21,8 @@
                             </div>
                             <span class="post-date">{{$data->created_at->isoFormat('dddd, D MMMM Y')}}</span>
                             <h3 class="post-title">{{$data->title}}</h3>
-                            <a href="{{route('berita_home.show', $data->uuid)}}" class="readmore stretched-link mt-auto"></a>
+                            <h6>{!! Str::limit($data->content, 50) !!}</h6>
+                            <a href="{{route('berita_home.show', $data->slug)}}" class="readmore stretched-link mt-auto"></a>
                             <div >
                                 <a href="#" class="text-dark mx-2 my-2">
                                     <i class="bi bi-people"> {{$data->name}} </i>
@@ -38,7 +39,7 @@
                         </div>
                     </div>
                 @endforeach
-            </div>
+            </div>            
 
             <div class="col sm-4">
                 <div class="card shadow p-3 mb-5 bg-white rounded">
@@ -56,7 +57,7 @@
 
                     <div class="row no-gutters">
                         <h6 style="font-weight: bold;" class="text-dark fs-5">Informasi Terpopuler</h6>
-                        @foreach ($berita as $item)
+                        @foreach ($berita_populer as $item)
                             <div class="col-md-3">
                                 <div class="overflow-hidder img-info-side">
                                     <img src="{{asset('storage/Berita/'.$item->img)}}" alt="" class="card-img mt-3 img-thumbnail">
@@ -65,7 +66,7 @@
                             <div class="col-md-9">
                                 <div class="card-body">
                                     <h6 class="post-title">
-                                        <a href="{{route('berita_home.show', $item->uuid)}}" class="text-dark fs-5">
+                                        <a href="{{route('berita_home.show', $item->slug)}}" class="text-dark fs-5">
                                             {{$item->title}}
                                         </a>
                                     </h6>
@@ -79,7 +80,7 @@
 
                     <div class="row no-gutters">
                         <h6 style="font-weight: bold;" class="text-dark fs-5">Informasi Terbaru</h6>
-                        @foreach ($berita_populer as $item)
+                        @foreach ($berita as $item)
                             <div class="col-md-3">
                                 <div class="overflow-hidder img-info-side">
                                     <img src="{{asset('storage/Berita/'.$item->img)}}" alt="" class="card-img mt-3 img-thumbnail">
@@ -88,7 +89,7 @@
                             <div class="col-md-9">
                                 <div class="card-body">
                                     <h6 class="post-title">
-                                        <a href="{{route('berita_home.show', $item->uuid)}}" class="text-dark fs-5">
+                                        <a href="{{route('berita_home.show', $item->slug)}}" class="text-dark fs-5">
                                             {{$item->title}}
                                         </a>
                                     </h6>
@@ -101,7 +102,9 @@
                     </div>
                 </div>
             </div>
-            
+        </div>
+        <div class="d-flex justify-content-center">
+            {{$berita->links('pagination::bootstrap-4')}}
         </div>
     </div>
 </section>
