@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\{
     Berita_category,
     Profile,
-    Profile_category
+    Profile_category,
+    Member
 };
 use Illuminate\Http\Request;
 
@@ -27,7 +28,8 @@ class ProfileHome extends Controller
     public function sumberdaya(){
         $berita_kategori = Berita_category::all();
         $profile_kategori = Profile_category::all();
-        return view('home.profile.sumberdaya', compact('berita_kategori', 'profile_kategori'));
+        $member = Member::all();
+        return view('home.profile.sumberdaya', compact('member', 'berita_kategori', 'profile_kategori'));
     }
     public function index()
     {

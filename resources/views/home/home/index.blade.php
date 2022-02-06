@@ -2,14 +2,14 @@
 @extends('home.layout')
 
 @section('content')
-<!-- ======= Hero Section ======= -->
+{{-- <!-- ======= Hero Section ======= -->
 <section id="hero" class="hero d-flex align-items-center">
 
     <div class="container">
     <div class="row">
         <div class="col-lg-6 d-flex flex-column justify-content-center ">
             <h1 data-aos="fade-up text-bold">Logo</h1>
-            <h2 data-aos="fade-up" data-aos-delay="400">UPT KPH Ajatappareng</h2>
+            <h2 data-aos="fade-up" data-aos-delay="400">UPT Kesatuan Pengelolaan Hutan Ajatappareng</h2>
         </div>
         <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
             <img src="{{ URL::asset('assets/dist/img/1540276247.jpg')}}" class="img-fluid" alt="">
@@ -17,7 +17,102 @@
     </div>
     </div>
 
-</section><!-- End Hero -->
+</section><!-- End Hero --> --}}
+
+{{-- <section id="hero" class="hero d-flex align-item-center">
+    <div class="container">
+        <div class="row">
+            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="">
+                <div class="carousel-item active">
+                    <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
+                        <img src="{{ URL::asset('assets/dist/img/1540276247.jpg')}}" class="img-fluid" alt="">
+                    </div>
+                    <div class="carousel-caption d-none d-md-block">
+                        <div class="col-lg-6 d-flex flex-column justify-content-center ">
+                            <h1 data-aos="fade-up text-bold">Logo</h1>
+                            <h2 data-aos="fade-up" data-aos-delay="400">UPT Kesatuan Pengelolaan Hutan Ajatappareng</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="..." class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Second slide label</h5>
+                        <p>Some representative placeholder content for the second slide.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="..." class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Third slide label</h5>
+                        <p>Some representative placeholder content for the third slide.</p>
+                    </div>
+                </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+</section> --}}
+
+<section id="hero" class="hero">
+    <div class="carousel slide d-flex align-items-center" id="carouselExampleCaptions" data-bs-ride="carousel">
+        <div class="carousel-inner d-flex align-items-center">
+            <div class="carousel-item active py-5">
+                <div class="container">
+                    <div class="row justify-content-between mt-5">
+                        <div class="col-lg-6 d-flex flex-column justify-content-center">
+                            <div class="text-center text-lg-start mx-auto aos-init aos-animate">
+                                <h1 data-aos="fade-up text-bold">Logo</h1>
+                                <h2 data-aos="fade-up" data-aos-delay="400">UPT Kesatuan Pengelolaan Hutan Ajatappareng</h2>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="200">
+                            <img src="{{ URL::asset('assets/dist/img/1540276247.jpg')}}" class="img-fluid" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item py-5">
+                <div class="container">
+                    <div class="row justify-content-between mt-5">
+                        <div class="col-lg-6 d-flex flex-column justify-content-center">
+                            <div class="text-center text-lg-start mx-auto aos-init aos-animate">
+                                <h1 data-aos="fade-up text-bold">Logo</h1>
+                                <h2 data-aos="fade-up" data-aos-delay="400">UPT Kesatuan Pengelolaan Hutan Ajatappareng</h2>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="200">
+                            <img src="{{ URL::asset('assets/dist/img/1540276247.jpg')}}" class="img-fluid" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</section>
 
 <main id="main">
     {{-- Visi Misi --}}

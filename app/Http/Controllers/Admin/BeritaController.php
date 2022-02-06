@@ -140,9 +140,10 @@ class BeritaController extends Controller
             'content.required' => 'Isi Berita harus diisi'
         ];
         if($request->slug != $berita->slug){
-            $rules['slug'] = 'required|unique:beritas';
+            $rules['slug'] = 'unique:beritas';
         }
         $validateData = $request->validate($rules);
+        // $request->validate($rules);
 
         DB::beginTransaction();
         try{

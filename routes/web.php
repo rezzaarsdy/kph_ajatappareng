@@ -37,14 +37,14 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::get('/', function () {
     return redirect()->route('beranda');
 });
-Route::get('beranda', [DashboardController::class, 'index'])->name('beranda');
+Route::get('/', [DashboardController::class, 'index'])->name('beranda');
 Route::post('inbox', [InboxController::class, 'store'])->name('inbox.store');
 Route::get('kontak', [InboxController::class, 'create'])->name('inbox.create');
 Route::get('informasi/{slug}', [BeritaHome::class, 'show'])->name('berita_home.show');
 Route::get('dokumentasi', [GaleriHome::class, 'index'])->name('galeri.home');
 Route::get('informasi', [BeritaHome::class, 'index'])->name('berita_home.index');
-Route::get('informasi/{id}', [BeritaHome::class, 'edit'])->name('berita_home.edit');
-Route::get('profil/{id}', [ProfileHome::class, 'edit'])->name('profile_home.edit');
+Route::get('informasi/edit/{id}', [BeritaHome::class, 'edit'])->name('berita_home.edit');
+Route::get('profile/{id}', [ProfileHome::class, 'edit'])->name('profile_home.edit');
 Route::get('struktur-organisasi/', [ProfileHome::class, 'struktur'])->name('profile_home.struktur');
 Route::get('sumber-daya/', [ProfileHome::class, 'sumberdaya'])->name('profile_home.sumberdaya');
 

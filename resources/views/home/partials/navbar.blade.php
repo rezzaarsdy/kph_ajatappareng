@@ -9,10 +9,10 @@
     <nav id="navbar" class="navbar">
         <ul>
             <li><a class="nav-link {{ (request()->routeIs('beranda')) ? 'active' : '' }}" href="{{route('beranda')}}">Beranda</a></li>
-            <li class="dropdown"><a href="#"><span>Profil</span> <i class="bi bi-chevron-down"></i></a>
+            <li class="dropdown"><a href="#" class=" {{ (request()->routeIs('profile_home.edit', 'profile_home.struktur', 'profile_home.sumberdaya')) ? 'active' : '' }}"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
                 <ul>
                     @foreach($profile_kategori as $item)
-                        <li><a href="{{route('profile_home.edit', $item->slug)}}">{{$item->name}}</a></li>
+                        <li><a href="{{route('profile_home.edit', $item->id)}}">{{$item->name}}</a></li>
                     @endforeach
                     <li><a href="{{route('profile_home.struktur')}}">Struktur Organisasi</a></li>
                     <li><a href="{{route('profile_home.sumberdaya')}}">Sumber Daya Manusia</a></li>
@@ -27,7 +27,7 @@
                     <li><a href="#">Lainnya</a></li>
                 </ul>
             </li>
-            <li class="dropdown"><a href="#"><span>Informasi</span> <i class="bi bi-chevron-down"></i></a>
+            <li class="dropdown"><a href="#" class=" {{ (request()->routeIs('berita_home.index', 'berita_home.edit')) ? 'active' : '' }}"><span>Informasi</span> <i class="bi bi-chevron-down"></i></a>
                 <ul>
                     <li><a href="{{route('berita_home.index')}}">Semua</a></li>
                     @foreach($berita_kategori as $item)
@@ -35,7 +35,7 @@
                     @endforeach
                 </ul>
             </li>
-            <li><a class="nav-link {{ (request()->routeIs('galeri_home.index')) ? 'active' : '' }}" href="{{route('galeri.home')}}">Galeri</a></li>
+            <li><a class="nav-link {{ (request()->routeIs('galeri.home')) ? 'active' : '' }}" href="{{route('galeri.home')}}">Galeri</a></li>
             <li><a class="nav-link {{ (request()->routeIs('inbox.create')) ? 'active' : '' }}" href="{{route('inbox.create')}}">Kontak</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>

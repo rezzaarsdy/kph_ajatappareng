@@ -8,7 +8,7 @@
 
         <header class="section-header">
             <h2>Informasi</h2>
-            <p>Informasi Terbaru</p>
+            <p>Detail Informasi</p>
         </header>
 
         <div class="row">

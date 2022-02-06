@@ -56,7 +56,7 @@
                             <div class="form-group" id="form1">
                                 <label>Slug</label>
                                 @error('slug') <span style="font-size: 12px; color:red; display: block;">{{ $message }}</span> @enderror
-                                <input type="name" min="0" id="slug" name="slug" value="{{ old ('slug') }}" class="form-control" disabled readonly>
+                                <input type="name" min="0" id="slug" name="slug" value="{{ old ('slug') }}" class="form-control" readonly>
                             </div>
 
                             <div class="form-group">

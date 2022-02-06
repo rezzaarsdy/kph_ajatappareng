@@ -39,6 +39,9 @@
                         </div>
                     </div>
                 @endforeach
+                <div class="d-flex justify-content-left">
+                    {{$berita->links('pagination::bootstrap-4')}}
+                </div>
             </div>            
 
             <div class="col sm-4">
@@ -80,7 +83,7 @@
 
                     <div class="row no-gutters">
                         <h6 style="font-weight: bold;" class="text-dark fs-5">Informasi Terbaru</h6>
-                        @foreach ($berita as $item)
+                        @foreach ($berita_terbaru as $item)
                             <div class="col-md-3">
                                 <div class="overflow-hidder img-info-side">
                                     <img src="{{asset('storage/Berita/'.$item->img)}}" alt="" class="card-img mt-3 img-thumbnail">
@@ -103,9 +106,7 @@
                 </div>
             </div>
         </div>
-        <div class="d-flex justify-content-center">
-            {{$berita->links('pagination::bootstrap-4')}}
-        </div>
+        
     </div>
 </section>
 <!-- End Recent Posts Section -->
