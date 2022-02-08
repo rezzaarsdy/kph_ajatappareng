@@ -18,11 +18,13 @@ class ProfileSeeder extends Seeder
         DB::table('profile_categories')->insert([
             'uuid' => Str::uuid(),
             'name' => 'Visi dan Misi', 
+            'slug' => 'visi-dan-misi'
         ]);
 
         DB::table('profile_categories')->insert([
             'uuid' => Str::uuid(),
             'name' => 'Sejarah', 
+            'slug' => 'sejarah'
         ]);
     }
 }

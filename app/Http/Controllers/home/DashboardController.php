@@ -9,7 +9,8 @@ use App\Models\{
     Berita_category,
     Galery,
     Profile,
-    Profile_category
+    Profile_category,
+    perhutanan_category
 };
 
 class DashboardController extends Controller
@@ -21,13 +22,14 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $kategori_perhutanan = perhutanan_category::all();
         $berita_kategori = Berita_category::all();
         $profile_kategori = Profile_category::all();
         $profile = Profile::select('profiles.*', 'profile_categories.id', 'profile_categories.name')
             ->leftJoin('profile_categories', 'profiles.profile_category_id', '=', 'profile_categories.id')->get();
         $berita = Berita::orderBy('created_at', 'desc')->paginate(3);
         $galery = Galery::orderBy('created_at', 'desc')->paginate(3);
-        return view('home.home.index', compact('profile', 'berita', 'galery', 'berita_kategori', 'profile_kategori'));
+        return view('home.home.index', compact('profile', 'berita', 'galery', 'berita_kategori', 'profile_kategori', 'kategori_perhutanan'));
     }
 
     /**

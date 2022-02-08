@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSlugToProfileCategoriesTable extends Migration
+class CreatePerhutanansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddSlugToProfileCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::table('profile_categories', function (Blueprint $table) {
-            $table->string('slug')->unique()->after('name');
+        Schema::create('perhutanans', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->string('link')->nullable();
+            $table->text('content');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ class AddSlugToProfileCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::table('profile_categories', function (Blueprint $table) {
-            $table->dropColumn('slug');
-        });
+        Schema::dropIfExists('perhutanans');
     }
 }

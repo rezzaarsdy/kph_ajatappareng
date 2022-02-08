@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Inbox;
 use App\Models\Berita_category;
 use App\Models\Profile_category;
+use App\Models\perhutanan_category;
 use File;
 use DB;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +25,8 @@ class InboxController extends Controller
     public function index()
     {
         $inbox = Inbox::all();
-        return view('admin.inbox.index', compact('inbox'));
+        $kategori_perhutanan = perhutanan_category::all();
+        return view('admin.inbox.index', compact('inbox', 'kategori_perhutanan'));
     }
 
     /**
@@ -34,9 +36,10 @@ class InboxController extends Controller
      */
     public function create()
     {
+        $kategori_perhutanan = perhutanan_category::all();
         $profile_kategori = Profile_category::all();
         $berita_kategori = Berita_category::all();
-        return view('home.kontak.index', compact('berita_kategori', 'profile_kategori'));
+        return view('home.kontak.index', compact('berita_kategori', 'profile_kategori', 'kategori_perhutanan'));
     }
 
     /**

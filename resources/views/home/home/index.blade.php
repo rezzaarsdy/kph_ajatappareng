@@ -77,12 +77,13 @@
                     <div class="row justify-content-between mt-5">
                         <div class="col-lg-6 d-flex flex-column justify-content-center">
                             <div class="text-center text-lg-start mx-auto aos-init aos-animate">
-                                <h1 data-aos="fade-up text-bold">Logo</h1>
+                                <h1 style="font-size: 30px" data-aos="fade-up text-bold">Dinas Kehutanan</h1>
+                                <h1 style="font-size: 28px" data-aos="fade-up text-bold">Provinsi Sulawesi Selatan</h1>
                                 <h2 data-aos="fade-up" data-aos-delay="400">UPT Kesatuan Pengelolaan Hutan Ajatappareng</h2>
                             </div>
                         </div>
                         <div class="col-lg-4 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="200">
-                            <img src="{{ URL::asset('assets/dist/img/1540276247.jpg')}}" class="img-fluid" alt="">
+                            <img src="{{ URL::asset('assets/dist/img/1540276247.png')}}" style="height: 350px; width: auto;" height="350" width="auto" class="img-fluid" alt="">
                         </div>
                     </div>
                 </div>

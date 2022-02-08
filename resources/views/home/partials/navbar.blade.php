@@ -20,11 +20,9 @@
             </li>
             <li class="dropdown"><a href="#"><span>Perhutanan Sosial</span> <i class="bi bi-chevron-down"></i></a>
                 <ul>
-                    <li><a href="#">HKm</a></li>
-                    <li><a href="#">HPHD</a></li>
-                    <li><a href="#">HTR</a></li>
-                    <li><a href="#">Perlindungan dan Pengamangan Hutan</a></li>
-                    <li><a href="#">Lainnya</a></li>
+                    @foreach ($kategori_perhutanan as $item)
+                        <li><a href="{{route('perhutanan_home.index', $item->slug)}}">{{$item->name}}</a></li>
+                    @endforeach
                 </ul>
             </li>
             <li class="dropdown"><a href="#" class=" {{ (request()->routeIs('berita_home.index', 'berita_home.edit')) ? 'active' : '' }}"><span>Informasi</span> <i class="bi bi-chevron-down"></i></a>

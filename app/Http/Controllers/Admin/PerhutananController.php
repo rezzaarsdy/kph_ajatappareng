@@ -5,9 +5,8 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\{
-    Profile,
-    Profile_category,
-    perhutanan_category
+    perhutanan_category,
+    perhutanan
 };
 use File;
 use DB;
@@ -16,7 +15,7 @@ use Error;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Str;
 
-class ProfileController extends Controller
+class PerhutananController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,10 +24,13 @@ class ProfileController extends Controller
      */
     public function index()
     {
+        $perhutanan = perhutanan::leftJoin('perhutanan_categories', 'perhutanans.perhutanan_category_id', '=', 'perhutanan_categories.id')
+            ->select('perhutanans.*', 'perhutanan_categories.name')
+            ->get();
+        // $perhutanan = perhutanan::all();
         $kategori_perhutanan = perhutanan_category::all();
-        $profile = Profile::select('profiles.*', 'profile_categories.id', 'profile_categories.name')
-            ->leftJoin('profile_categories', 'profiles.profile_category_id', '=', 'profile_categories.id')->get();
-        return view('admin.profile.index', compact('profile', 'kategori_perhutanan'));
+        // dd($perhutanan);
+        return view('admin.perhutanan.index', compact('perhutanan', 'kategori_perhutanan'));
     }
 
     /**
@@ -38,9 +40,8 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        $kategori = Profile_category::all();
         $kategori_perhutanan = perhutanan_category::all();
-        return view('admin.profile.add', compact('kategori', 'kategori_perhutanan'));
+        return view('admin.perhutanan.add', compact('kategori_perhutanan'));
     }
 
     /**
@@ -52,31 +53,30 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'profile_category_id' => 'required',
-            'content' => 'required',
+            'title' => 'required',
+            'content' => 'required'
         ], [
-            'profile_category_id.required' => 'Kategori Harus Dipilih',
-            'content.required' => 'Content harus diisi',
+            'title.required' => 'Judul harus diisi',
+            'content.required' => 'Isi Content ta'
         ]);
 
         DB::beginTransaction();
         try {
-            $profile = new Profile;
-            $uuid = Uuid::uuid4()->getHex();
-            $profile->uuid = $uuid;
-            $profile->profile_category_id = $request->profile_category_id;
-            $profile->content = $request->content;
-            $profile->save();
-
+            $perhutanan = new perhutanan;
+            $perhutanan->title = $request->title;
+            $perhutanan->perhutanan_category_id = $request->perhutanan_category_id;
+            $perhutanan->link = $request->link;
+            $perhutanan->content = $request->content;
+            $perhutanan->save();
             DB::commit();
-            return redirect()->route('profile.index')->with([
+            return redirect()->route('perhutanan.index')->with([
                 'f_bg' => 'bg-success',
                 'f_title' => 'Berhasil.',
                 'f_msg' => 'Data Berhasil Ditambah.',
             ]);
         } catch (Error $e) {
             DB::rollBack();
-            return redirect()->route('admin.index')->with([
+            return redirect()->route('perhutanan.list')->with([
                 'f_bg' => 'bg-danger',
                 'f_title' => 'Tidak Berhasil.',
                 'f_msg' => 'Data Tidak Berhasil Ditambah.',
@@ -101,12 +101,12 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($uuid)
+    public function edit($id)
     {
-        $profile = Profile::findOrFail($uuid);
-        $kategori = Profile_category::all();
+        $perhutanan = perhutanan::find($id);
+        // dd($perhutanan);
         $kategori_perhutanan = perhutanan_category::all();
-        return view('admin.profile.edit', compact('profile', 'kategori', 'kategori_perhutanan'));
+        return view('admin.perhutanan.edit', compact('perhutanan', 'kategori_perhutanan'));
     }
 
     /**
@@ -116,35 +116,36 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $uuid)
+    public function update(Request $request, $id)
     {
-        $profile = Profile::findOrFail($uuid);
+        $perhutanan = perhutanan::findOrFail($id);
         $this->validate($request, [
-            'profile_category_id' => 'required',
-            'content' => 'required',
+            'title' => 'required',
+            'content' => 'required'
         ], [
-            'profile_category_id.required' => 'Kategori Harus Dipilih',
-            'content.required' => 'Content harus diisi',
+            'title.required' => 'Judul harus diisi',
+            'content.required' => 'Isi Content ta'
         ]);
 
         DB::beginTransaction();
         try {
-            $profile->profile_category_id = $request->profile_category_id;
-            $profile->content = $request->content;
-            $profile->save();
-
+            $perhutanan->title = $request->title;
+            $perhutanan->perhutanan_category_id = $request->perhutanan_category_id;
+            $perhutanan->link = $request->link;
+            $perhutanan->content = $request->content;
+            $perhutanan->save();
             DB::commit();
-            return redirect()->route('profile.index')->with([
+            return redirect()->route('perhutanan.index')->with([
                 'f_bg' => 'bg-success',
                 'f_title' => 'Berhasil.',
-                'f_msg' => 'Data Berhasil Diperbarui.',
+                'f_msg' => 'Data Berhasil Ditambah.',
             ]);
         } catch (Error $e) {
             DB::rollBack();
-            return redirect()->route('admin.index')->with([
+            return redirect()->route('perhutanan.list')->with([
                 'f_bg' => 'bg-danger',
-                'f_title' => 'Tidak berhasil',
-                'f_msg' => 'Data Tidak Berhasil Diperbarui.',
+                'f_title' => 'Tidak Berhasil.',
+                'f_msg' => 'Data Tidak Berhasil Ditambah.',
             ]);
         }
     }
@@ -155,21 +156,22 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($uuid)
+    public function destroy($id)
     {
         DB::beginTransaction();
         try {
-            $profile = Profile::findOrFail($uuid);
-            $profile->delete();
+            $kategori = perhutanan::find($id);
+
+            $kategori->delete();
             DB::commit();
-            return redirect()->route('profile.index')->with([
+            return redirect()->route('perhutanan.index')->with([
                 'f_bg' => 'bg-success',
                 'f_title' => 'Berhasil.',
                 'f_msg' => 'Data Berhasil Dihapus.',
             ]);
         } catch (Error $e) {
             DB::rollback();
-            return redirect()->route('profile.index')->with([
+            return redirect()->route('perhutanan.index')->with([
                 'f_bg' => 'bg-danger',
                 'f_title' => 'Tidak Berhasil',
                 'f_msg' => 'Data Tidak Berhasil Dihapus',

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Berita;
 use App\Models\Berita_category;
+use App\Models\perhutanan_category;
 use File;
 use DB;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +26,8 @@ class BeritaController extends Controller
     {
         $berita = Berita::select('beritas.*', 'users.id', 'users.name')
             ->leftJoin('users', 'beritas.user_id', '=', 'users.id')->get();
-        return view('admin.berita.index', compact('berita'));
+            $kategori_perhutanan = perhutanan_category::all();
+        return view('admin.berita.index', compact('berita', 'kategori_perhutanan'));
     }
 
     /**
@@ -36,7 +38,8 @@ class BeritaController extends Controller
     public function create()
     {
         $category = Berita_category::all();
-        return view('admin.berita.add', compact('category'));
+        $kategori_perhutanan = perhutanan_category::all();
+        return view('admin.berita.add', compact('category', 'kategori_perhutanan'));
     }
 
     /**
@@ -115,7 +118,8 @@ class BeritaController extends Controller
     {
         $category = Berita_category::all();
         $berita = Berita::findOrFail($uuid);
-        return view('admin.berita.edit', compact('berita', 'category'));
+        $kategori_perhutanan = perhutanan_category::all();
+        return view('admin.berita.edit', compact('berita', 'category', 'kategori_perhutanan'));
     }
 
     /**

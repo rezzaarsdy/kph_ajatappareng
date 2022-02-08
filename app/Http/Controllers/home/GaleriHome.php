@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Galery;
 use App\Models\Berita_category;
 use App\Models\Profile_category;
+use App\Models\perhutanan_category;
 
 class GaleriHome extends Controller
 {
@@ -17,10 +18,11 @@ class GaleriHome extends Controller
      */
     public function index()
     {
+        $kategori_perhutanan = perhutanan_category::all();
         $berita_kategori = Berita_category::all();
         $profile_kategori = Profile_category::all();
         $galery = Galery::orderBy('created_at', 'desc')->get();
-        return view('home.galeri.index', compact('galery', 'profile_kategori', 'berita_kategori'));
+        return view('home.galeri.index', compact('galery', 'profile_kategori', 'berita_kategori', 'kategori_perhutanan'));
     }
 
     /**

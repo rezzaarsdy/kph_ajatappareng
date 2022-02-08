@@ -9,7 +9,8 @@ use App\Models\{
     Berita_category,
     Galery,
     Profile,
-    Profile_category
+    Profile_category,
+    perhutanan_category
 };
 
 class BeritaHome extends Controller
@@ -23,6 +24,7 @@ class BeritaHome extends Controller
     {
         $berita_kategori = Berita_category::all();
         $profile_kategori = Profile_category::all();
+        $kategori_perhutanan = perhutanan_category::all();
         $profile = Profile::select('profiles.*', 'profile_categories.id', 'profile_categories.name')
             ->leftJoin('profile_categories', 'profiles.profile_category_id', '=', 'profile_categories.id')->get();
         $berita = Berita::select('beritas.*', 'users.id', 'users.name')
@@ -38,7 +40,8 @@ class BeritaHome extends Controller
             'galery',
             'berita_kategori',
             'berita_terbaru',
-            'berita_populer'
+            'berita_populer',
+            'kategori_perhutanan'
         ));
     }
 
@@ -74,6 +77,7 @@ class BeritaHome extends Controller
         
         $berita_kategori = Berita_category::all();
         $profile_kategori = Profile_category::all();
+        $kategori_perhutanan = perhutanan_category::all();
         $berita = $slug::select('beritas.*', 'users.id', 'users.name')
             ->leftJoin('users', 'beritas.user_id', '=', 'users.id')
             ->findOrFail($slug->uuid);
@@ -82,7 +86,7 @@ class BeritaHome extends Controller
         $berita->update($dataInfo);
         $berita_terbaru = Berita::orderBy('created_at', 'desc')->paginate(3);
         $berita_populer = Berita::orderBy('view', 'desc')->paginate(3);
-        return view('home.berita.show', compact('berita', 'berita_kategori', 'berita_terbaru', 'berita_populer', 'profile_kategori'));
+        return view('home.berita.show', compact('berita', 'berita_kategori', 'berita_terbaru', 'berita_populer', 'profile_kategori', 'kategori_perhutanan'));
     }
 
     /**
@@ -95,11 +99,12 @@ class BeritaHome extends Controller
     {
         $berita_kategori = Berita_category::all();
         $profile_kategori = Profile_category::all();
+        $kategori_perhutanan = perhutanan_category::all();
         $berita = Berita::where('berita_category_id', $id)
             ->orderBy('created_at', 'desc')->paginate(4);
         $berita_terbaru = Berita::orderBy('created_at', 'desc')->paginate(3);
         $berita_populer = Berita::orderBy('view', 'desc')->paginate(3);
-        return view('home.berita.index', compact('berita', 'berita_kategori', 'berita_terbaru', 'berita_populer', 'profile_kategori'));
+        return view('home.berita.index', compact('berita', 'berita_kategori', 'berita_terbaru', 'berita_populer', 'profile_kategori', 'kategori_perhutanan'));
     }
 
     /**

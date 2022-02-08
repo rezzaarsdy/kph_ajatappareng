@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Berita;
 use App\Models\Galery;
 use App\Models\Member;
+use App\Models\perhutanan_category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,7 +22,8 @@ class DashboardAdmin extends Controller
         $berita = Berita::count();
         $galeri = Galery::count();
         $member = Member::count();
-        return view('admin.dashboard.index', compact('berita', 'galeri', 'member'));
+        $kategori_perhutanan = perhutanan_category::all();
+        return view('admin.dashboard.index', compact('berita', 'galeri', 'member', 'kategori_perhutanan'));
     }
 
     /**

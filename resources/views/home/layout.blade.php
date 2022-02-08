@@ -27,7 +27,7 @@
 
 <!-- Template Main CSS File -->
 <link href="{{asset('home/assets/css/style.css')}}" rel="stylesheet">
-<link rel="icon" href="{{URL::asset('assets/dist/img/1540276247.jpg')}}" sizes="32x32" />
+<link rel="icon" href="{{URL::asset('assets/dist/img/1540276247.png')}}" sizes="32x32" />
 
 <!-- =======================================================
 * Template Name: FlexStart - v1.9.0

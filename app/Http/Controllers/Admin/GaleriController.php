@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Galery;
+use App\Models\perhutanan_category;
 use File;
 use DB;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +23,8 @@ class GaleriController extends Controller
     public function index()
     {
         $galeri = Galery::all();
-        return view('admin.galeri.index', compact('galeri'));
+        $kategori_perhutanan = perhutanan_category::all();
+        return view('admin.galeri.index', compact('galeri', 'kategori_perhutanan'));
     }
 
     /**
@@ -32,7 +34,8 @@ class GaleriController extends Controller
      */
     public function create()
     {
-        return view('admin.galeri.add');
+        $kategori_perhutanan = perhutanan_category::all();
+        return view('admin.galeri.add', compact('kategori_perhutanan'));
     }
 
     /**
@@ -104,7 +107,8 @@ class GaleriController extends Controller
     public function edit($id)
     {
         $galeri = Galery::all();
-        return view('admin.galeri.edit', compact('galeri'));
+        $kategori_perhutanan = perhutanan_category::all();
+        return view('admin.galeri.edit', compact('galeri', 'kategori_perhutanan'));
     }
 
     /**

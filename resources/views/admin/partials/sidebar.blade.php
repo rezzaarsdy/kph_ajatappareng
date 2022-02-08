@@ -3,7 +3,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('dashboard') }}" class="brand-link">
-      <img src="{{ URL::asset('assets/dist/img/1540276247.jpg')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: 1.">
+      <img src="{{ URL::asset('assets/dist/img/1540276247.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: 1.">
       <span class="brand-text font-weight-light">Ajatappareng</span>
     </a>
 
@@ -48,60 +48,42 @@
               </p>
             </a>
           </li>
-
+          
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{route('perhutanan.index')}}" class="nav-link {{ (request()->routeIs('perhutanan.index', 'perhutanan.create', 'perhutanan.edit')) ? 'active' : '' }}">
               <i class="nav-icon fas fa-database"></i>
               <p>
-                Informasi
+                Perhutanan Sosial 
+                {{-- <span class="right badge badge-danger">New</span> --}}
+              </p>
+            </a>
+          </li>
+
+          {{-- <li class="nav-item">
+            <a href="#" class="nav-link {{ (request()->routeIs('perhutanan.index', 'perhutanan.create', 'perhutanan.edit')) ? 'active' : '' }}">
+              <i class="nav-icon fas fa-database"></i>
+              <p>
+                Perhutanan Sosial
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
+              @foreach ($kategori_perhutanan as $item)
+                <li class="nav-item">
+                  <a href="{{route('')}}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>{{$item->name}}</p>
+                  </a>
+                </li>
+              @endforeach
               <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>HKM</p>
-                </a>
-              </li>
-              {{-- <li class="nav-item">
-                <a href="{{ route('series-variety.index') }}" class="nav-link {{ (request()->routeIs('series-variety.index')) ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Series Varieties</p>
-                </a>
-              </li> --}}
-              <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>HPHD</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>HTR</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Perlindungan dan Pengamangan Hutan</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Lainnya</p>
-                </a>
-              </li>
-              {{-- <li class="nav-item">
                 <a href="../charts/uplot.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Products Suitabilities</p>
                 </a>
-              </li> --}}
+              </li>
             </ul>
-          </li>
+          </li> --}}
 
           <li class="nav-item">
             <a href="{{route('member.index')}}" class="nav-link {{ (request()->routeIs('member.index', 'member.create', 'member.edit')) ? 'active' : '' }}">

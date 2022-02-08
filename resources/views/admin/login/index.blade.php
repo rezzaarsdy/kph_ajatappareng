@@ -13,12 +13,12 @@
     <link rel="stylesheet" href="{{URL::asset('assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{URL::asset('assets/dist/css/adminlte.min.css')}}">
-    <link rel="icon" href="{{URL::asset('assets/dist/img/1540276247.jpg')}}" sizes="32x32" />
+    <link rel="icon" href="{{URL::asset('assets/dist/img/1540276247.png')}}" sizes="32x32" />
     </head>
     <body class="hold-transition login-page">
     <div class="login-box">
     <div class="login-logo">
-        <img src="{{ URL::asset('assets/dist/img/Logo.png')}}" width="150px" height="200px" alt="">
+        <img src="{{ URL::asset('assets/dist/img/1540276247.png')}}" width="150px" height="200px" alt="">
         <br>
         <a href="{{route('login')}}"><b>KPH </b>Ajatappareng</a>
     </div>

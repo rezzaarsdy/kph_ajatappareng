@@ -11,6 +11,7 @@ use Error;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Str;
 use App\Models\Member;
+use App\Models\perhutanan_category;
 
 class MemberController extends Controller
 {
@@ -22,7 +23,8 @@ class MemberController extends Controller
     public function index()
     {
         $member = Member::all();
-        return view('admin.member.index', compact('member'));
+        $kategori_perhutanan = perhutanan_category::all();
+        return view('admin.member.index', compact('member', 'kategori_perhutanan'));
     }
 
     /**
@@ -32,7 +34,8 @@ class MemberController extends Controller
      */
     public function create()
     {
-        return view('admin.member.add');
+        $kategori_perhutanan = perhutanan_category::all();
+        return view('admin.member.add', compact('kategori_perhutanan'));
     }
 
     /**
@@ -124,7 +127,8 @@ class MemberController extends Controller
     public function edit($uuid)
     {
         $member = Member::findOrFail($uuid);
-        return view('admin.member.edit', compact('member'));
+        $kategori_perhutanan = perhutanan_category::all();
+        return view('admin.member.edit', compact('member', 'kategori_perhutanan'));
     }
 
     /**

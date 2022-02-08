@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\{
     User,
-    Role
+    Role,
+    perhutanan_category
 };
 use File;
 use DB;
@@ -26,7 +27,8 @@ class AdminController extends Controller
     {
         $user = User::all();
         $role = Role::all();
-        return view('admin.admin.index', compact('role', 'user'));
+        $kategori_perhutanan = perhutanan_category::all();
+        return view('admin.admin.index', compact('role', 'user', 'kategori_perhutanan'));
     }
 
     /**
@@ -37,7 +39,8 @@ class AdminController extends Controller
     public function create()
     {
         $role = Role::all();
-        return view('admin.admin.add', compact('role'));
+        $kategori_perhutanan = perhutanan_category::all();
+        return view('admin.admin.add', compact('role', 'kategori_perhutanan'));
     }
 
     /**
@@ -119,7 +122,8 @@ class AdminController extends Controller
     {
         $dataAdmin = User::findOrFail($uuid);
         $role = Role::all();
-        return view('admin.admin.edit', compact('role', 'dataAdmin'));
+        $kategori_perhutanan = perhutanan_category::all();
+        return view('admin.admin.edit', compact('role', 'dataAdmin', 'kategori_perhutanan'));
     }
 
     /**

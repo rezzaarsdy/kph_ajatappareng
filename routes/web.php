@@ -9,12 +9,14 @@ use App\Http\Controllers\Admin\{
     GaleriController,
     InboxController,
     MemberController,
-    ProfileController
+    ProfileController,
+    PerhutananController
 };
 use App\Http\Controllers\home\{
     DashboardController,
     BeritaHome,
     GaleriHome,
+    PerhutananHome,
     ProfileHome
 };
 use App\Models\Berita;
@@ -47,6 +49,8 @@ Route::get('informasi/edit/{id}', [BeritaHome::class, 'edit'])->name('berita_hom
 Route::get('profile/{id}', [ProfileHome::class, 'edit'])->name('profile_home.edit');
 Route::get('struktur-organisasi/', [ProfileHome::class, 'struktur'])->name('profile_home.struktur');
 Route::get('sumber-daya/', [ProfileHome::class, 'sumberdaya'])->name('profile_home.sumberdaya');
+Route::get('perhutanan/{slug}', [PerhutananHome::class, 'index'])->name('perhutanan_home.index');
+// Route::get('perhutanan-sosial/{slug}', [PerhutananHome::class, 'index'])->name('perhutanan_home.index');
 
 //slug
 Route::get('/berita/checkslug', [BeritaController::class, 'checkSlug'])->name('checkSlug');
@@ -120,4 +124,14 @@ Route::group(['middleware' => ['auth', 'checklevel:1,2']], function () {
         'update'
     );
     Route::get('profile/delete/{uuid}', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    //Routing Perhutanan
+    Route::get('perhutanan', [PerhutananController::class, 'index'])->name('perhutanan.index');
+    Route::get('perhutanan/create', [PerhutananController::class, 'create'])->name('perhutanan.create');
+    Route::post('perhutanan/create', [PerhutananController::class, 'store'])->name('perhutanan.store');
+    Route::get('perhutanan/edit/{id}/', [PerhutananController::class, 'edit'])->name('perhutanan.edit');
+    Route::resource('perhutanan', PerhutananController::class)->only(
+        'update'
+    );
+    Route::get('perhutanan/delete/{id}', [PerhutananController::class, 'destroy'])->name('perhutanan.destroy');
 });
