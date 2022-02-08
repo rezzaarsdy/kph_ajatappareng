@@ -4,17 +4,17 @@
 <!-- ======= Recent Posts Section ======= -->
 <section id="recent-blog-posts" class="recent-blog-posts">
 
-    <div class="container mt-5" data-aos="fade-left">
+    <div class="container mt-4" style="min-height: 700px">
 
         <header class="section-header">
             <h2>Informasi</h2>
             <p>Informasi Terbaru</p>
         </header>
 
-        <div class="row">
+        <div class="row aos-init aos-animate" data-aos="fade-left">
             <div class="col-sm-8">
                 @foreach ($berita as $data)
-                    <div class="card shadow mb-5 bg-white rounded" data-aos="zoom-in">
+                    <div class="card shadow p-3 mb-5 bg-white rounded" data-aos="zoom-in">
                         <div class="post-box">
                             <div class="post-img" style="height: 300px">
                                 <img src="{{asset('storage/Berita/'.$data->img)}}" class="img-fluid" alt="">
@@ -39,12 +39,10 @@
                         </div>
                     </div>
                 @endforeach
-                <div class="d-flex justify-content-left">
                     {{$berita->links('pagination::bootstrap-4')}}
-                </div>
             </div>            
 
-            <div class="col sm-4">
+            <div class="col-sm-4">
                 <div class="card shadow p-3 mb-5 bg-white rounded">
                     <div class="row">
                         <h5 style="font-weight: bold" class="text-dark text-center fs-4">Cari Informasi</h5>
@@ -62,17 +60,17 @@
                         <h6 style="font-weight: bold;" class="text-dark fs-5">Informasi Terpopuler</h6>
                         @foreach ($berita_populer as $item)
                             <div class="col-md-3">
-                                <div class="overflow-hidder img-info-side">
+                                <div class="overflow-hidden img-info-side">
                                     <img src="{{asset('storage/Berita/'.$item->img)}}" alt="" class="card-img mt-3 img-thumbnail">
                                 </div>
                             </div>
                             <div class="col-md-9">
                                 <div class="card-body">
-                                    <h6 class="post-title">
+                                    <h1 class="card-title">
                                         <a href="{{route('berita_home.show', $item->slug)}}" class="text-dark fs-5">
                                             {{$item->title}}
                                         </a>
-                                    </h6>
+                                    </h1>
                                     <p class="card-text">
                                         <small class="text-muted">{{$item->created_at->isoFormat('D MMM Y')}}</small>
                                     </p>
@@ -81,7 +79,7 @@
                         @endforeach
                     </div>
 
-                    <div class="row no-gutters">
+                    <div class="row no-gutters mt-2">
                         <h6 style="font-weight: bold;" class="text-dark fs-5">Informasi Terbaru</h6>
                         @foreach ($berita_terbaru as $item)
                             <div class="col-md-3">
