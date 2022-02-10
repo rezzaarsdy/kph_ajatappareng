@@ -11,18 +11,21 @@
         </header>
             <div class="row gy-4 portfolio-container" data-aos="fade-up" data-aos-delay="200">
                 @foreach ($galery as $data)
-                <div class="col-lg-4 col-md-6 portfolio-item">
-                    <div class="portfolio-wrap">
-                        <img src="{{asset('storage/Galeri/'. $data->img)}}" class="img-fluid" alt="">
-                        <div class="portfolio-info">
-                        <h4>{{$data->title}}</h4>
-                        <p>{{$data->description}}</p>
-                        <div class="portfolio-links">
-                            <a href="{{asset('storage/Galeri/'. $data->img)}}" data-gallery="portfolioGallery" class="portfokio-lightbox" title="App 1"><i class="bi bi-eye"></i></a>
-                        </div>
+                    <div class="col-lg-4 col-md-6 portfolio-item">
+                        <div class="portfolio-wrap">
+                            @php $picture = explode('|', $data->img); @endphp
+                                <img src="{{asset('storage/Galeri/'. $picture[0])}}" class="img-fluid" alt="">
+                                <div class="portfolio-info">
+                                    <h4>{{$data->title}}</h4>
+                                    <p>{{$data->description}}</p>
+                                    <div class="portfolio-links">
+                                        @foreach(explode('|', $data->img) as $picture)
+                                        <a href="{{asset('storage/Galeri/'. $picture)}}" data-gallery="portfolioGallery" class="portfokio-lightbox" title="App 1"><i class="bi bi-eye"></i></a>
+                                        @endforeach
+                                    </div>
+                                </div>
                         </div>
                     </div>
-                </div>
                 @endforeach
             </div>
     </div>

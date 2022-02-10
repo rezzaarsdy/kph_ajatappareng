@@ -81,14 +81,14 @@ Route::group(['middleware' => ['auth', 'checklevel:1,2']], function () {
     Route::get('/dashboard', [DashboardAdmin::class, 'index'])->name('dashboard');
 
     //routing Member
-    Route::get('anggota', [MemberController::class, 'index'])->name('member.index');
-    Route::get('anggota/create', [MemberController::class, 'create'])->name('member.create');
-    Route::post('anggota/create', [MemberController::class, 'store'])->name('member.store');
-    Route::get('anggota/edit/{uuid}', [MemberController::class, 'edit'])->name('member.edit');
-    Route::resource('anggota', MemberController::class)->only(
+    Route::get('personil', [MemberController::class, 'index'])->name('member.index');
+    Route::get('personil/create', [MemberController::class, 'create'])->name('member.create');
+    Route::post('personil/create', [MemberController::class, 'store'])->name('member.store');
+    Route::get('personil/edit/{uuid}', [MemberController::class, 'edit'])->name('member.edit');
+    Route::resource('personil', MemberController::class)->only(
         'update'
     );
-    Route::get('member/delete/{uuid}', [MemberController::class, 'destroy'])->name('member.destroy');
+    Route::get('personil/delete/{uuid}', [MemberController::class, 'destroy'])->name('member.destroy');
 
 
     //routing berita admin

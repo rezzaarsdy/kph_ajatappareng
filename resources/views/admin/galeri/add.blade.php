@@ -70,18 +70,11 @@
                         </button>
                     </div>
                 </div>
-                <div class="file-upload">
-                    <div class="image-upload-wrap">
-                        <input class="file-upload-input" type='file' name="file" value="{{old('file')}}" onchange="readURL(this);" accept="application/jpg"/>
-                        <div class="drag-text">
-                            <h3>Drag and drop a file or select add Image</h3>
-                        </div>
-                    </div>
-                    <div class="file-upload-content">
-                        <img class="file-upload-image" alt="your image" />
-                        <div class="image-title-wrap">
-                            <button type="button" onclick="removeUpload()" class="remove-image">Hapus <span class="image-title">Data</span></button>
-                        </div>
+                <div class="card-body">
+                    <label>Upload</label>
+                    <div class="custom-file">
+                        <input type="file" multiple name="file[]" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
                     </div>
                 </div>
                 <!-- /.card-body -->

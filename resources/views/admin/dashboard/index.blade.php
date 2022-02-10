@@ -79,7 +79,7 @@
               <div class="inner">
                 <h3>{{$member}}<sup style="font-size: 20px"></sup></h3>
     
-                <p>Anggota</p>
+                <p>Personil</p>
               </div>
               <div class="icon">
                 <i class="icon ion-ios-people"></i>

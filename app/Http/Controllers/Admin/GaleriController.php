@@ -46,15 +46,17 @@ class GaleriController extends Controller
      */
     public function store(Request $request)
     {
+        
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
-            'file' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
+            'file.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ], [
             'title.required' => 'Judul harus diisi',
             'description.required' => 'Deskripsi foto harus diisi',
             'file.mimes' => 'File Harus Bertipe JPG/JPEG/PNG',
         ]);
+        // dd($request);
 
         DB::beginTransaction();
         try{
@@ -63,12 +65,16 @@ class GaleriController extends Controller
             $galeri->uuid = $uuid;
             $galeri->title = $request->title;
             $galeri->description = $request->description;
+            $imgData=array();
             if($request->file){
-                $nameFile = 'Foto Galeri' . $galeri->title .  '__' . time() . '__' . $request->file->getClientOriginalName();
-                $path = 'public/Galeri';
-                $request->file->storeAs($path, $nameFile);
-                $galeri->img = $nameFile;
+                foreach ($request->file as $file){
+                    $nameFile = 'Foto Galeri' . $galeri->title .  '__' . time() . '__' . $file->getClientOriginalName();
+                    $path = 'public/Galeri';
+                    $file->storeAs($path, $nameFile);
+                    $imgData[] = $nameFile;
+                }
             }
+            $galeri->img = implode('|', $imgData);
             $galeri->save();
 
             DB::commit();

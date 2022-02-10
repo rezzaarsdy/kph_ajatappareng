@@ -12,6 +12,7 @@ use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Str;
 use App\Models\Member;
 use App\Models\perhutanan_category;
+use App\Models\Level;
 
 class MemberController extends Controller
 {
@@ -34,8 +35,9 @@ class MemberController extends Controller
      */
     public function create()
     {
+        $kategori_jabatan = Level::all();
         $kategori_perhutanan = perhutanan_category::all();
-        return view('admin.member.add', compact('kategori_perhutanan'));
+        return view('admin.member.add', compact('kategori_perhutanan', 'kategori_jabatan'));
     }
 
     /**
@@ -48,6 +50,8 @@ class MemberController extends Controller
     {
         $this->validate($request, [
             'fullname' => 'required',
+            'nip' => 'required',
+            'pangkat' => 'required',
             'address' => 'required',
             'place_of_birth' => 'required',
             'date_of_birth' => 'required',
@@ -55,6 +59,7 @@ class MemberController extends Controller
             'email' => 'required|email',
             'education' => 'required',
             'golongan' => 'required',
+            'level_id' => 'required',
             'img' => 'file|image|mimes:jpeg,png,jpg|max:2048'
         ], [
             'fullname.required' => 'Nama lengkap harus diisi',
@@ -65,7 +70,10 @@ class MemberController extends Controller
             'email.required' => 'E-mail harus diisi',
             'education.required' => 'Pendidikan Terakhir harus diisi',
             'golongan.required' => 'Status harus diisi',
-            'img.mimes' => 'File Harus Bertipe JPG/JPEG/PNG'
+            'level_id.required' => 'Jabatan Harus dipilih',
+            'img.mimes' => 'File Harus Bertipe JPG/JPEG/PNG',
+            'nip.required' => 'NIP harus diisi',
+            'pangkat' => 'Pangkat harus diisi'
         ]);
 
         DB::beginTransaction();
@@ -74,6 +82,8 @@ class MemberController extends Controller
             $member = new Member;
             $member->uuid = $uuid;
             $member->fullname = $request->fullname;
+            $member->nip = $request->nip;
+            $member->pangkat = $request->pangkat;
             $member->address = $request->address;
             $member->place_of_birth = $request->place_of_birth;
             $member->date_of_birth = $request->date_of_birth;
@@ -81,7 +91,7 @@ class MemberController extends Controller
             $member->email = $request->email;
             $member->education = $request->education;
             $member->golongan = $request->golongan;
-            $member->level_id = 1; //blm terkoneksi dengan database level
+            $member->level_id = $request->level_id; //blm terkoneksi dengan database level
             if ($request->file) {
                 $fileName = 'Foto Member__' . $request->fullname . '__' . time() . '__' . $request->file->getClientOriginalName();
                 $path = 'public/Member';
@@ -126,9 +136,10 @@ class MemberController extends Controller
      */
     public function edit($uuid)
     {
+        $kategori_jabatan = Level::all();
         $member = Member::findOrFail($uuid);
         $kategori_perhutanan = perhutanan_category::all();
-        return view('admin.member.edit', compact('member', 'kategori_perhutanan'));
+        return view('admin.member.edit', compact('member', 'kategori_perhutanan', 'kategori_jabatan'));
     }
 
     /**
@@ -143,6 +154,8 @@ class MemberController extends Controller
         $member = Member::findOrFail($uuid);
         $this->validate($request, [
             'fullname' => 'required',
+            'nip' => 'required',
+            'pangkat' => 'required',
             'address' => 'required',
             'place_of_birth' => 'required',
             'date_of_birth' => 'required',
@@ -150,6 +163,7 @@ class MemberController extends Controller
             'email' => 'required|email',
             'education' => 'required',
             'golongan' => 'required',
+            'level_id' => 'required',
             'img' => 'file|image|mimes:jpeg,png,jpg|max:2048'
         ], [
             'fullname.required' => 'Nama lengkap harus diisi',
@@ -160,12 +174,17 @@ class MemberController extends Controller
             'email.required' => 'E-mail harus diisi',
             'education.required' => 'Pendidikan Terakhir harus diisi',
             'golongan.required' => 'Status harus diisi',
-            'img.mimes' => 'File Harus Bertipe JPG/JPEG/PNG'
+            'level_id.required' => 'Jabatan Harus dipilih',
+            'img.mimes' => 'File Harus Bertipe JPG/JPEG/PNG',
+            'nip.required' => 'NIP harus diisi',
+            'pangkat' => 'Pangkat harus diisi'
         ]);
 
         DB::beginTransaction();
         try{
             $member->fullname = $request->fullname;
+            $member->nip = $request->nip;
+            $member->pangkat = $request->pangkat;
             $member->address = $request->address;
             $member->place_of_birth = $request->place_of_birth;
             $member->date_of_birth = $request->date_of_birth;
@@ -173,7 +192,7 @@ class MemberController extends Controller
             $member->email = $request->email;
             $member->education = $request->education;
             $member->golongan = $request->golongan;
-            $member->level_id = 1; //blm terkoneksi dengan database level
+            $member->level_id = $request->level_id; //blm terkoneksi dengan database level
             if ($request->file) {
                 if (\File::exists('storage/Member/' . $member->img)) {
                     \File::delete('storage/Member/' . $member->img);

@@ -69,13 +69,14 @@
     
 </section> --}}
 
-<section id="hero" class="hero">
-    <div class="carousel slide d-flex align-items-center" id="carouselExampleCaptions" data-bs-ride="carousel">
-        <div class="carousel-inner d-flex align-items-center">
-            <div class="carousel-item active py-5">
+<div class="carousel slide d-flex align-items-center" id="carouselExampleCaptions" data-bs-ride="carousel">
+    <div class="carousel-inner d-flex align-items-center">
+        
+            <div class="carousel-item active">
+                <section id="hero" class="hero py-5">
                 <div class="container">
-                    <div class="row justify-content-between mt-5">
-                        <div class="col-lg-6 d-flex flex-column justify-content-center">
+                    <div class="row justify-content-between mt-5 py-5">
+                        <div class="col-lg-6 d-flex flex-column justify-content-center ">
                             <div class="text-center text-lg-start mx-auto aos-init aos-animate">
                                 <h1 style="font-size: 30px" data-aos="fade-up text-bold">Dinas Kehutanan</h1>
                                 <h1 style="font-size: 28px" data-aos="fade-up text-bold">Provinsi Sulawesi Selatan</h1>
@@ -87,8 +88,13 @@
                         </div>
                     </div>
                 </div>
+                </section>
             </div>
-        </div>
+            <div class="carousel-item ">
+                <section class="herooo">
+                </section>
+            </div>
+        
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
@@ -98,7 +104,7 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-</section>
+</div>
 
 <main id="main">
     {{-- Visi Misi --}}

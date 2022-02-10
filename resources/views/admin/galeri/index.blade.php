@@ -54,11 +54,15 @@
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$data->title}}</td>
                                     <td>{{$data->description}}</td>
-                                    <td><img width="100px" height="100px" src="{{asset('storage/Galeri/'.$data->img)}}" alt=""></td>
                                     <td>
-                                        <a class="badge badge-info m-1" href="{{route('galeri.edit', $data->uuid)}}">
+                                        @foreach(explode('|', $data->img) as $picture)
+                                            <img width="100px" height="100px" src="{{asset('storage/Galeri/'.$picture)}}" alt="">
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        {{-- <a class="badge badge-info m-1" href="{{route('galeri.edit', $data->uuid)}}">
                                             <span class="fa fa-edit"></span> Edit
-                                        </a>
+                                        </a> --}}
                                         <a class="badge badge-danger m-1" href="{{route('galeri.destroy', $data->uuid)}}" onclick=" return confirm('Apakah anda ingin menghapus data ini?')">
                                             <span class="fa fa-trash"></span> Hapus
                                         </a>

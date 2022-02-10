@@ -15,7 +15,7 @@
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{url('admin/dashboard')}}">Home</a></li>
-            <li class="breadcrumb-item active">Anggota</li>
+            <li class="breadcrumb-item active">Personil</li>
             </ol>
         </div>
         </div>
@@ -31,7 +31,7 @@
             <div class="card">
                 <div class="card-header">
                 <div class="bs-example">
-                    <h3 class="card-title">Anggota</h3>
+                    <h3 class="card-title">Personil</h3>
                     <a href="{{route('member.create')}}" class="btn btn-primary font-weight-bolder float-right">
                         <i class="la la-plus"></i>Tambah Data</a>
                 </div>

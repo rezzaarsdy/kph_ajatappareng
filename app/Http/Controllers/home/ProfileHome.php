@@ -31,7 +31,9 @@ class ProfileHome extends Controller
         $kategori_perhutanan = perhutanan_category::all();
         $berita_kategori = Berita_category::all();
         $profile_kategori = Profile_category::all();
-        $member = Member::all();
+        $member = Member::leftJoin('levels', 'members.level_id', '=', 'levels.id')
+            ->select('members.*', 'levels.jabatan')
+            ->get();
         return view('home.profile.sumberdaya', compact('member', 'berita_kategori', 'profile_kategori', 'kategori_perhutanan'));
     }
     public function index()

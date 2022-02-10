@@ -89,7 +89,7 @@
             <a href="{{route('member.index')}}" class="nav-link {{ (request()->routeIs('member.index', 'member.create', 'member.edit')) ? 'active' : '' }}">
               <i class="nav-icon fas fa-users"></i>
               <p>
-                Anggota 
+                Personil 
                 {{-- <span class="right badge badge-danger">New</span> --}}
               </p>
             </a>

@@ -18,7 +18,7 @@
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="{{route('member.index')}}">Anggota</a></li>
+            <li class="breadcrumb-item"><a href="{{route('member.index')}}">Personil</a></li>
             <li class="breadcrumb-item active">Tambah</li>
             </ol>
         </div>
@@ -32,7 +32,7 @@
         <div class="col-md-6">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title"> Data Anggota</h3>
+                    <h3 class="card-title"> Data Personil</h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -48,6 +48,18 @@
                             <label>Nama Lengkap</label>
                             @error('fullname') <span style="font-size: 12px; color:red; display: block;">{{ $message }}</span> @enderror
                             <input type="name" min="0" id="name" name="fullname" value="{{ $member->fullname }}" class="form-control" placeholder="Masukkan Nama Lengkap" >
+                        </div>
+
+                        <div class="form-group" id="form1">
+                            <label>NIP</label>
+                            @error('nip') <span style="font-size: 12px; color:red; display: block;">{{ $message }}</span> @enderror
+                            <input type="name" min="0" id="nip" name="nip" value="{{ $member->nip }}" class="form-control" placeholder="Masukkan NIP" >
+                        </div>
+
+                        <div class="form-group" id="form1">
+                            <label>Pangkat</label>
+                            @error('fullname') <span style="font-size: 12px; color:red; display: block;">{{ $message }}</span> @enderror
+                            <input type="name" min="0" id="pangkat" name="pangkat" value="{{ $member->pangkat }}" class="form-control" placeholder="Masukkan Pangkat" >
                         </div>
 
                         <div class="form-group">
@@ -101,10 +113,12 @@
 
                         <div class="form-group">
                             <label>Jabatan</label>
-                            @error('level_id') <span style="font-size: 12px; color:red; display: block;">{{ $message }}</span> @enderror
-                            <select id="level_id" name="level_id" class="form-control select_role">
+                            @error('level_id') <span style="font-size: 12px; color:red; display:block;">{{$message}}</span>@enderror
+                            <select id="level_id" name="level_id" class="form-control select_role" onchange="tampilkan()">
                                 <option value="" selected disabled hidden>Silakan Pilih</option>
-                                
+                                @foreach ($kategori_jabatan as $us)
+                                    <option value="{{ $us->id }}" @if ($member->level_id == $us->id ) selected @endif>{{$us->jabatan}}</option>
+                                @endforeach
                             </select>
                         </div>
                 </div>

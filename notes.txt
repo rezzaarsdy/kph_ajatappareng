@@ -1,0 +1,4 @@
+nama database : id17719042_kph_ajatappareng
+username database : id17719042_kph
+host db : localhost
+db password : 6p60[8z[Un(_~i2(
